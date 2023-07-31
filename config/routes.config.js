@@ -9,3 +9,9 @@ router.get('/' , miscController.getHome);
 
 router.get('/register', authController.register);
 router.post('/register', authController.doRegister);
+
+router.get('/login', authController.login);
+router.post('/login', authController.doLogin);
+
+
+module.exports = router;

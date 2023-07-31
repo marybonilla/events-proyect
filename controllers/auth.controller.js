@@ -37,4 +37,31 @@ module.exports.doRegister = (req, res, next) => {
     })
 }
 
+// hacer el login 
 
+module.exports.login = (req, res, next) => {
+    res.render ('auth/login');
+}
+
+module.exports.doLogin = (req, res, next) => {
+    const passportController = passport.authenticate ('local-aouth', (err, user, validations) =>{
+        if (error) {
+            next (error)
+        }else if (!user) {
+            res.render ('auth/login' , {
+                user: req.body,
+                errors: validations
+            })
+        } else {
+            req.login(user, error => {
+                if (error) {
+                    next (error)
+                } else {
+                    res.redirect ('/profile')
+                }
+            })
+        }
+    })
+
+    passportController(req, res, next);
+}

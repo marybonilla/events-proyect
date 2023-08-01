@@ -9,7 +9,6 @@ module.exports.register = (req, res, next) => {
 module.exports.doRegister = (req, res, next) => {
     const { email, password, repeatPassword } = req.body
    
-    console.log(req.body)
   
     const renderWithErrors = (errors) => {
       res.render('auth/register', {
@@ -30,22 +29,22 @@ module.exports.doRegister = (req, res, next) => {
     User.findOne({ email })
       .then(user => {
         if (user) {
-            console.log("entra")
-          renderWithErrors({ email: 'Email already in use' });
-        } else {
-          const userData = {
-            ...req.body,
-            avatar: req.file ? req.file.path : undefined
+            renderWithErrors({ email: 'Email already in use' });
+          } else {
+            const userData = {
+              ...req.body,
+              avatar: req.file ? req.file.path : undefined
+            }
+    
+            return User.create(userData)
+              .then(() => {
+                res.redirect('/login')
+              })
           }
-  
-          return User.create(req.body)
-            .then(() => {
-              res.redirect('/login')
-            })
-        }
       })
       .catch(err => {
         if (err instanceof mongoose.Error.ValidationError) {
+            console.log(err);
           renderWithErrors(err.errors);
         } else {
           next(err)
@@ -60,7 +59,7 @@ module.exports.login = (req, res, next) => {
 }
 
 module.exports.doLogin = (req, res, next) => {
-    const passportController = passport.authenticate ('local-aouth', (err, user, validations) =>{
+    const passportController = passport.authenticate ('local-auth', (error, user, validations) =>{
         if (error) {
             next (error)
         }else if (!user) {
@@ -81,3 +80,8 @@ module.exports.doLogin = (req, res, next) => {
 
     passportController(req, res, next);
 }
+
+module.exports.logout = (req, res, next) => {
+    req.session.destroy();
+    res.redirect('/login');
+  }

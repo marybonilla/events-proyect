@@ -47,8 +47,8 @@ const routes = require('./config/routes.config');
 app.use(routes);
 
 app.use((req, res, next) => {
-  next(createError(404, 'Page not found'));
-})
+    next(createError(404, 'Page not found'));
+  })
 
 app.use((error, req, res, next) => {
   console.error(error);

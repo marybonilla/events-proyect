@@ -7,35 +7,51 @@ module.exports.register = (req, res, next) => {
 }
 
 module.exports.doRegister = (req, res, next) => {
-    const { email } = req.body
-
+    const { email, password, repeatPassword } = req.body
+   
+    console.log(req.body)
+  
     const renderWithErrors = (errors) => {
-        res.render('auth/register', {
-            user : req.body,
-            errors
-        })
+      res.render('auth/register', {
+        user: req.body,
+        errors
+      })
     }
-    // confirmar si hay ya un usuario en la bd con ese email
-
+  
+    if (password !== repeatPassword) {
+      return renderWithErrors({
+        repeatPassword: 'Passwords must match',
+        password: 'Passwords must match',
+      })
+    }
+  
+    // Comprobar si ya hay alguno en la bbdd con ese email
+  
     User.findOne({ email })
-        .then (user => {
-            if (user){
-                renderWithErrors ({ email : 'Email already in use'});
-            }   else {
-                return User.create( req.body)
-                    .then(() => {
-                        res.redirect('/login')
-                    })
-            }
-    })
-    .catch(err => {
-        if(err instanceof mongoose.Error.ValidationError){
-            renderWithErrors (err.errors);
-        } else{
-            next(err)
+      .then(user => {
+        if (user) {
+            console.log("entra")
+          renderWithErrors({ email: 'Email already in use' });
+        } else {
+          const userData = {
+            ...req.body,
+            avatar: req.file ? req.file.path : undefined
+          }
+  
+          return User.create(req.body)
+            .then(() => {
+              res.redirect('/login')
+            })
         }
-    })
-}
+      })
+      .catch(err => {
+        if (err instanceof mongoose.Error.ValidationError) {
+          renderWithErrors(err.errors);
+        } else {
+          next(err)
+        }
+      })
+  }
 
 // hacer el login 
 

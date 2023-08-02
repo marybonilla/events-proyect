@@ -19,6 +19,11 @@ router.post('/login',authMiddleware.isUnauthenticated, authController.doLogin);
 
 router.get('/logout', authMiddleware.isAuthenticated, authController.logout);
 
+// rutas para google 
+router.get('/login/google', authMiddleware.isUnauthenticated, authController.loginGoogle);
+router.get('/authenticate/google/cb', authMiddleware.isUnauthenticated, authController.doLoginGoogle);
+
+
 
 router.get('/profile', authMiddleware.isAuthenticated, usersController.profile);
 router.get('/profile/:id', authMiddleware.isAuthenticated, usersController.getUserProfile);

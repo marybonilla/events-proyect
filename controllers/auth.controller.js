@@ -58,30 +58,48 @@ module.exports.login = (req, res, next) => {
     res.render ('auth/login');
 }
 
-module.exports.doLogin = (req, res, next) => {
-    const passportController = passport.authenticate ('local-auth', (error, user, validations) =>{
-        if (error) {
-            next (error)
-        }else if (!user) {
-            res.render ('auth/login' , {
-                user: req.body,
-                errors: validations
-            })
-        } else {
-            req.login(user, error => {
-                if (error) {
-                    next (error)
-                } else {
-                    res.redirect ('/profile')
-                }
-            })
-        }
+const doLoginStrategy = (req, res, next, strategy = 'local-auth') => {
+    const passportController = passport.authenticate(strategy, (error, user, validations) => {
+      if (error) {
+        next(error)
+      } else if (!user) {
+        res.render('auth/login', {
+          user: req.body,
+          errors: validations
+        })
+      } else {
+        req.login(user, error => {
+          if (error) {
+            next(error);
+          } else {
+            res.redirect('/profile')
+          }
+        });
+      }
     })
-
+  
     passportController(req, res, next);
-}
+  }
+  
+
+module.exports.doLogin = (req, res, next) => {
+    doLoginStrategy(req, res, next);
+  }
+  
+  module.exports.doLoginGoogle = (req, res, next) => {
+    doLoginStrategy(req, res, next, 'google-auth');
+  }
+  
+  module.exports.loginGoogle = (req, res, next) => {
+    const passportController = passport.authenticate('google-auth', {
+      scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'],
+    });
+  
+    passportController(req, res, next);
+  }
 
 module.exports.logout = (req, res, next) => {
     req.session.destroy();
     res.redirect('/login');
   }
+

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const miscController = require ('../controllers/misc.controller');
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
+const localsController = require('../controllers/locals.controller');
 
 
 const authMiddleware = require('../middlewares/auth.middleware');
@@ -27,6 +28,10 @@ router.get('/authenticate/google/cb', authMiddleware.isUnauthenticated, authCont
 
 router.get('/profile', authMiddleware.isAuthenticated, usersController.profile);
 router.get('/profile/:id', authMiddleware.isAuthenticated, usersController.getUserProfile);
+
+/* Local */
+
+router.get('/locals', localsController.list);
 
 
 module.exports = router;

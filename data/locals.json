@@ -1,0 +1,156 @@
+
+
+[
+    {
+         "name":"Triton",
+        "address":"Cl. de Ayala, 144, 28006 Madrid",
+        "image":"https://img.freepik.com/foto-gratis/vista-superior-surtido-mariscos-deliciosos_23-2148926773.jpg?w=2000&t=st=1691257997~exp=1691258597~hmac=86a2fa1d8552048a09edda167ad117034ec99f1e9853750be6b7ee65f4c72a48",
+        "description": "Dos generacions de restauradors han aconseguit mantenir un ambient familiar i proper en els menjadors del Triton al llarg de quasi 40 anys, preservant la tradició familiar i casolana de la cuina de mercat.",
+        "type":"Restaurant",
+        "restaurantDetails": "Mediterranean",
+         "capacity": "150"
+    },
+    {
+        "name":"MonkeyBeach",
+        "address":"Plaza del Remo, 5, 29620, La Carihuela, Torremolinos, Málaga",
+        "image":"https://img.freepik.com/foto-gratis/surtido-bocadillos_144627-33624.jpg?w=2000&t=st=1691258560~exp=1691259160~hmac=102246a4a7c8e088c36e0c6b83974a6c833909b3c5fb463be4652c6b6e027ade",
+        "description": "Un restaurante, ubicado en La Carihuela (Torremolinos), que ofrece una experiencia culinaria excepcional en un entorno encantador junto al playa. Una combinación de sabores deliciosos, vistas impresionantes y un ambiente acogedor. Es un lugar ideal para disfrutar de una comida relajante y unos cocktails memorables.",
+        "type":"Restaurant",
+        "restaurantDetails": "Indian",
+        "capacity": "100"
+    },
+    {
+        "name":"Restaurante La Gaditana",
+        "address":"Calle Fuente del Berro 23, 28009 Madrid España",
+        "image":"https://img.freepik.com/foto-gratis/kebab-costillas-cordero-servido-pure-papa_140725-5852.jpg?w=2000&t=st=1691259623~exp=1691260223~hmac=2b32040447b0dfb969b10054f6af90d626e1d73b2ef44e03279e2239c978434b",
+        "description": "Un nuevo espacio junto la clásica Taberna, donde disfrutar de los mejores platos de la cocina gaditana y andaluza. Aumentamos nuestro aforo para satisfacer mejor sus necesidades sin sacrificar la calidad que nos caracteriza.",
+        "type":"Restaurant",
+        "restaurantDetails": "European",
+        "capacity": "50"
+    },
+    {
+        "name":"La Gastronómica Burgers",
+        "address":"Carrer Vilamarí 9-15, 08015 Barcelona España",
+        "image":"https://img.freepik.com/foto-gratis/hamburguesa-carne-sobre-tabla-madera-tomate-cebolla-frijoles-nueces-vista-lateral_141793-2390.jpg?w=1380&t=st=1691259785~exp=1691260385~hmac=b0afbae937db75fb7b970e165c70b12573d6c444b4505aac94ba06516acb8a19",
+        "description": "Nace con un concepto muy claro: Platos totalmente elaborados por nuestro equipo con ingredientes de la mejor calidad y cocina abierta para mostrar todo el proceso de elaboración.",
+        "type":"Restaurant",
+        "restaurantDetails": "Street food",
+        "capacity": "70"
+    },
+    {
+        "name":"Nacho Bravo",
+        "address":"Paseo de las Delicias 139, 28045 Madrid España",
+        "image":"https://img.freepik.com/foto-gratis/tacos-mexicanos-carne-res-salsa-tomate-salsa_2829-14218.jpg?w=2000&t=st=1691260300~exp=1691260900~hmac=aa5385e437845762130506f600afd4a96114c588f619ad8a97ff0c9d1379b380",
+         "description": "A lo largo de mi vida he recorrido una gran cantidad de paises donde he podido conocer diferentes culturas, degustar distintos sabores y matices que hoy forman parte de lo que soy.",
+        "type":"Restaurant",
+        "restaurantDetails": "Mexican",
+         "capacity": "100"
+    },
+    {
+        "name":"Oven Mozzarella",
+        "address":"C / Gran Vía, 55 Oven, Steakburger y Pura Kaffeina, 28013 Madrid España",
+        "image":"https://img.freepik.com/foto-gratis/vista-superior-surtido-mariscos-deliciosos_23-2148926773.jpg?w=2000&t=st=1691257997~exp=1691258597~hmac=86a2fa1d8552048a09edda167ad117034ec99f1e9853750be6b7ee65f4c72a48",
+        "description": "Elaboramos una cocina italiana tradicional con nuestro personal toque moderno, siempre de alta calidad, en la que la base son los mejores ingredientes, frescos, cuidados y seleccionados con cariño. ¿Qué mayor naturalidad que elaborarlos al momento? De esta forma conseguimos un increíble sabor, textura y aroma que te transportarán a lo más profundo de la Toscana.",
+        "type":"Restaurant",
+         "restaurantDetails": "Italian",
+        "capacity": "175"
+    },
+    {
+        "name":"Bar H Emblemático",
+        "address":"C/ Castelló, 83, 28006 Madrid España",
+        "image":"https://img.freepik.com/foto-gratis/cerveza-dorada-junto-deliciosas-hamburguesas-mesa-madera-papas-fritas-ensalada-verde-papas-fritas-salsa-ajo_482257-19717.jpg?w=1380&t=st=1691261126~exp=1691261726~hmac=aa2e68cdbae389b7d4970c0ffaa95f0dcfc5aad7a6a0f9a4431e6048da838b62",
+        "description": "Bar H Emblemático es el último proyecto, en efecto, de los artífices del mítico comedor de Serrano. Podríamos decir que es una vuelta a sus orígenes, cuando en los años 60 el abuelo Pepe Hevia traía el mejor producto al bar que entonces regentaba.",
+        "type":"Bar",
+         "barDetails": "Tapas bar",
+        "capacity": "55"
+    },
+    {
+        "name":"Fun Fun",
+        "address":"C/ Don Pedro, 20, 28005 Madrid España",
+        "image":"https://media.timeout.com/images/105827531/1920/1080/image.jpg",
+        "description": "Ahora son tres socios. Se ha sumado Antonella que regenta este work in progress centrado en vinos naturales españoles y alguna sidra francesa.",
+        "type":"Bar",
+         "barDetails": "Wine bar",
+        "capacity": "35"
+    },
+    {
+        "name":"Tarde.O",
+        "address":"Paseo de la Castellana, 22 28046 Madrid España",
+        "image":"https://img.freepik.com/foto-gratis/restaurante-lujo-bar-interior-candelabros-muebles_114579-2341.jpg?w=2000&t=st=1691261610~exp=1691262210~hmac=af27af82348ef2242cbeba3950c345faa6c39562949c32e07c15d5ea45820e40",
+        "description": "En el interior del fabuloso y emblemático hotel Rosewood Villa Magna hay incontables atractivos pero uno de los más accesibles es este espacio conocido como Tarde.O. Accesible económicamente porque puedes acercarte a su barra en deliciosa penumbra o entrar en su magnético y espectacular patio simplemente para tomarte un cóctel y picar algo.",
+        "type":"Bar",
+         "barDetails": "Hotel bar",
+        "capacity": "87"
+    },
+    {
+        "name":"La Tarara",
+        "address":"C/ Áncora, 19, 28045 Madrid España",
+        "image":"https://media.timeout.com/images/105817862/1920/1080/image.jpg",
+        "description": "Una actualización esmerada y humilde del bar de barrio, encantadora esquina con una amplia terraza en la que los vecinos se convierten pronto en parroquianos, esa taberna donde, como apunta su propietaria.",
+        "type":"Bar",
+         "barDetails": "Tavern",
+        "capacity": "69"
+    },
+    {
+        "name":"Camerino Cocktail Bar",
+        "address":"C / Gran Vía, 55 Oven, Steakburger y Pura Kaffeina, 28013 Madrid España",
+        "image":"https://img.freepik.com/foto-gratis/vista-superior-surtido-mariscos-deliciosos_23-2148926773.jpg?w=2000&t=st=1691257997~exp=1691258597~hmac=86a2fa1d8552048a09edda167ad117034ec99f1e9853750be6b7ee65f4c72a48",
+        "description": "El Padrino, La Naranja Mecánica, 007... son algunos de los títulos que se han vuelto, como Amélie, puro líquido. Alcohólico, claro. Detrás de este proyecto están Joaquín Serrano Jiménez y su hermano Guillermo y, por supuesto, el gran trabajo del ya muy popular José Piñero, diseñador de vajillas para destacados chefs del país como Dani García o Dabiz Muñoz.",
+        "type":"Bar",
+         "barDetails": "Pub",
+        "capacity": "120"
+    },
+    {
+        "name":"Café del Art",
+        "address":"Plaza de Cascorro, 9 Madrid España",
+        "image":"https://hips.hearstapps.com/hmg-prod/images/cafe-del-art-madrid-elle-7-1573419118.jpg?crop=1xw:1xh;center,top&resize=980:*",
+        "description": "Café del Art abría sus puertas en la zona de la Latina en 2019, y enseguida se convertía en la nueva cafetería de moda de Madrid en la que disfrutar de un café diferente. ",
+        "type":"Cafeteria",
+         "cafeteriaDetails": "Breakfast shop",
+        "capacity": "120"
+    },
+    {
+        "name":"Satanás Coffee Corner",
+        "address":"C/ de l'Arc de Sant Ramon del Call, 11, 08002 Barcelona",
+        "image":"https://saveatrain-12e85.kxcdn.com/blog/wp-content/uploads/2020/01/DSC0173-999x660.jpg",
+        "description": "Este cafetería pone la cadera en inconformista. Es propiedad de una 25 años que está en el amor con el grano de café. Ha dominado meticulosamente el arte de la elaboración de la cerveza sus mezclas. Ellos cambian con la temporada así que asegúrese de preguntarle lo que la mezcla actual es.",
+        "type":"Cafeteria",
+         "cafeteriaDetails": "Coworking",
+        "capacity": "120"
+    },
+    {
+        "name":"Café Gijón",
+        "address":"paseo de Recoletos,21 Madrid España",
+        "image":"https://www.civitatis.com/blog/wp-content/uploads/2022/04/cafe-gijon-madrid-espana.jpg",
+        "description": "El Gijón no solo es uno de los cafés literarios más importantes de España. También forma parte de la historia de las letras hispanas. Incluso, algunas obras están ambientadas en esta cafetería. Una de las más destacadas es La noche que llegué al Café Gijón, de Francisco Umbral.",
+        "type":"Cafeteria",
+         "cafeteriaDetails": "Library",
+        "capacity": "45"
+    },
+    {
+        "name":"Maison Bertaux",
+        "address":"28 Greek Street, Soho, London",
+        "image":"https://images.squarespace-cdn.com/content/v1/5347ac46e4b0bccee306b36d/1481892686979-GX3EWUXP3YW6R5GR2WR9/_MG_7575.jpg?format=2500w",
+        "description": "Considerada la pastelería más antigua de Londres, la Maison Bertaux fue inaugurada en 1871 por un parisino que huía del ejército prusiano. Situada en pleno Soho londinense, cerca de Carnaby, es fácil identificar su fachada pintada de azul oscuro y sus toldos a rayas azules y blancas. Hoy en día se sigue sirviendo, además de un delicioso café, unos extraordinarios pasteles y bollería elaborada a diario de forma artesanal.",
+        "type":"Cafeteria",
+         "cafeteriaDetails": "Pastry shop",
+        "capacity": "100"
+    },
+    {
+        "name":"Café Florian",
+        "address":"Piazza San Marco, 57, 30124 Venezia (VE) Italy",
+        "image":"https://caffeflorian.com/wp-content/uploads/2022/05/Rectangle-642.jpg",
+        "description": "Groups, locations, events or special occasions, whatever your desire, we are by your side in the most beautiful place in the world: Saint Mark’s Square.",
+        "type":"Cafeteria",
+         "cafeteriaDetails": "Bistro",
+        "capacity": "87"
+    }
+    
+    
+    
+
+
+
+
+
+]

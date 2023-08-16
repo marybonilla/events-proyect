@@ -31,7 +31,8 @@ router.get('/profile/:id', authMiddleware.isAuthenticated, usersController.getUs
 
 /* Local */
 
-router.get('/locals', localsController.list);
-
+router.get('/locals',authMiddleware.isAuthenticated, localsController.list);
+router.post('/locals/create',authMiddleware.isAuthenticated, upload.single('image'), localsController.doCreate);
+router.get('/locals/create',authMiddleware.isAuthenticated, localsController.create);
 
 module.exports = router;

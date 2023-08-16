@@ -1,0 +1,261 @@
+<script id="search-js" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js" defer></script>
+
+{{#if edit }}
+ <h1>edit</h1>
+  <form action="/locals/{{local.id}}/edit" method="POST" enctype="multipart/form-data">
+{{else}}
+ <h1>Create New Local</h1>
+  <form action="/locals/create" method="POST" enctype="multipart/form-data">
+{{/if}}
+  <div class="form-group mb-1">
+    <label for="name">Name local</label>
+    <input name="name" type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" id="name" placeholder="Enter name"
+      value="{{ local.name }}" required>
+    {{#if errors.name}}
+      <div class="invalid-feedback">
+        {{errors.name.message}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group mb-1">
+    <label for="location">Location</label>
+    <input
+      type="text"
+      class="form-control"
+      id="mapbox-autofill"
+      placeholder="Start typing your address, e.g. Pintor Ignacio de..."
+      autocomplete="address-line1"
+    >
+    {{#if errors.location}}
+      <div class="invalid-feedback">
+        {{errors.location.message}}
+      </div>
+    {{/if}}
+  </div>
+
+  <input name="location" type="hidden" id="mapbox-autofill-location">
+  <input name="address" type="hidden" id="mapbox-autofill-address">
+
+  <div id="minimap-container" class="hidden" style="height: 200px; width: 600px;"></div>
+
+  <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input class="form-control" type="file" id="image" name="image">
+    </div>
+
+  <div class="form-group mb-1">
+    <label for="text">Description</label>
+    <textarea name="description" type="text" class="form-control html-editor {{#if errors.description}}is-invalid{{/if}}" id="text"
+      placeholder="Enter restaurant description" rows="10">{{ local.description }}</textarea>
+    {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>
+    {{/if}}
+  </div>
+
+  <div class="form-group mb-1">
+    <label for="capacity">Capacity</label>
+    <input name="capacity" type="number" class="form-control {{#if errors.capacity}}is-invalid{{/if}}" id="capacity" placeholder="Enter capacity"
+      value="{{ local.capacity }}">
+    {{#if errors.capacity}}
+      <div class="invalid-feedback">
+        {{errors.capacity.message}}
+      </div>
+    {{/if}}
+  </div>
+  
+  
+  <fieldset class="row mb-3">
+    <legend class="col-form-label col-sm-2 pt-0">Type</legend>
+    <div class="col-sm-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultRestaurant" value="restaurant">
+            <label class="form-check-label" for="flexRadioDefault1">
+                Restaurant
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultBar" value="bar" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+                Bar
+            </label>
+            
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultCafeteria" value="cafeteria" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+                Cafeteria
+            </label>
+            
+        </div>
+    </div>
+  </fieldset>
+
+    <div class="hidden" id="detailsContainer">
+        <div class="form-group mb-3" id="restaurantDetailsSection" style="display: none;">
+            <select name="restaurantDetails" class="form-select" aria-label="Default select example">
+                <option selected>Type Of Cuisine</option>
+                <option value="Mexican">Mexican</option>
+                <option value="European">European</option>
+                <option value="Mediterranean">Mediterranean</option>
+                <option value="Italian">Italian</option>
+                <option value="Latin">Latin</option>
+                <option value="Indian">Indian</option>
+                <option value="Asian">Asian</option>
+                <option value="Street food">Street food</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3" id="barDetailsSection" style="display: none;">
+            <select name="barDetails" class="form-select" aria-label="Default select example" required>
+                <option value="" selected disabled>Select Type Of Bar</option>
+                <option value="Tapas bar">Tapas bar</option>
+                <option value="Wine bar">Wine bar</option>
+                <option value="Lounge bar">Lounge bar</option>
+                <option value="Pub">Pub</option>
+                <option value="Hotel bar">Hotel bar</option>
+                <option value="Tavern">Tavern</option>
+                <option value="Canteen bar">Canteen bar</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3" id="cafeteriaDetailsSection" style="display: none;">
+            <select name="cafeteriaDetails" class="form-select" aria-label="Default select example">
+                <option selected>Type Of Cafeteria</option>
+                <option value="Pastry shop">Pastry shop</option>
+                <option value="Coworking">Coworking</option>
+                <option value="Bistro">Bistro</option>
+                <option value="Library">Library</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Breakfast shop">Breakfast shop</option>
+                
+            </select>
+            
+            
+        </div>
+    </div>
+
+
+  <button type="submit" class="btn btn-primary mb-5">Send</button>
+</form>
+
+<script>
+  const ACCESS_TOKEN = 'pk.eyJ1IjoiY2RlbGF0b3JyZSIsImEiOiJja3Y5bHJ6ZzcweG0yMnZtZzI4eXJna2UxIn0.m-OWQWPhRrb5ZNRz0M9AqQ';
+
+  let autofillCollection;
+  let minimap;
+
+  const minimapContainer = document.getElementById("minimap-container");
+  const addressInput = document.getElementById("mapbox-autofill");
+  const locationInput = document.getElementById("mapbox-autofill-location");
+  const addressInputText = document.getElementById("mapbox-autofill-address");
+
+  // Autofill initialization
+  document.getElementById("search-js").onload = () => {
+    mapboxsearch.config.accessToken = ACCESS_TOKEN;
+    
+    autofillCollection = mapboxsearch.autofill({});
+    
+    minimap = new MapboxAddressMinimap();
+    minimap.canAdjustMarker = true;
+    minimap.satelliteToggle = true;
+    minimap.onSaveMarkerLocation = (lnglat) => {
+      console.log(`Marker moved to ${lnglat}`);
+    };
+    const minimapContainer = document.getElementById("minimap-container");
+    minimapContainer.appendChild(minimap);
+    
+    autofillCollection.addEventListener(
+      "retrieve",
+      async (e) => {
+        if (minimap) {
+          minimap.feature = e.detail.features[0];
+          minimapContainer.classList.remove("hidden");
+        }
+        console.log(e.detail.features[0]);
+        locationInput.value = JSON.stringify(e.detail.features[0].geometry.coordinates);
+        addressInputText.value = e.detail.features[0].properties.address_line1;
+      }
+    );
+  };
+</script>
+
+<!-- codigo para manejar el hide de los botones -->
+
+<script>
+    const restaurantDetailsHTML = `
+        <div class="form-group mb-3" id="restaurantDetailsSection">
+                <select name="restaurantDetails" class="form-select" aria-label="Default select example">
+                    <option selected>Type Of Cuisine</option>
+                    <option value="Mexican">Mexican</option>
+                    <option value="European">European</option>
+                    <option value="Mediterranean">Mediterranean</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Latin">Latin</option>
+                    <option value="Indian">Indian</option>
+                    <option value="Asian">Asian</option>
+                    <option value="Street food">Street food</option>
+                </select>
+         </div>`;
+
+    const barDetailsHTML = `
+        <div class="form-group mb-3" id="barDetailsSection" >
+                <select name="barDetails" class="form-select" aria-label="Default select example">
+                    <option selected>Type Of Bar</option>
+                    <option value="Tapas bar">Tapas bar</option>
+                    <option value="Wine bar">Wine bar</option>
+                    <option value="Lounge bar">Lounge bar</option>
+                    <option value="Pub">Pub</option>
+                    <option value="Hotel bar">Hotel bar</option>
+                    <option value="Tavern">Tavern</option>
+                    <option value="Canteen bar">Canteen bar</option>
+                    
+                </select>
+        </div>`;
+    
+    const cafeteriaDetailsHTML = `
+        <div  class="form-group mb-3" id="cafeteriaDetailsSection">
+                <select name="cafeteriaDetails" class="form-select" aria-label="Default select example">
+                    <option selected>Type Of Cafeteria</option>
+                    <option value="Pastry shop">Pastry shop</option>
+                    <option value="Coworking">Coworking</option>
+                    <option value="Bistro">Bistro</option>
+                    <option value="Library">Library</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Breakfast shop">Breakfast shop</option>
+                    
+                </select>
+                
+                
+        </div>`;
+
+    const detailsContainer = document.getElementById("detailsContainer");
+
+    const handleTypeChange = () => {
+    const selectedType = document.querySelector('input[name="type"]:checked').value;
+    let detailsHTML = "";
+    if (selectedType === "restaurant") {
+        detailsHTML = restaurantDetailsHTML;
+    } else if (selectedType === "bar") {
+        detailsHTML = barDetailsHTML;
+    } else if (selectedType === "cafeteria") {
+        detailsHTML = cafeteriaDetailsHTML;
+    }
+    
+    detailsContainer.innerHTML = detailsHTML;
+};
+// Agrega un evento para manejar el cambio de tipo
+const typeRadios = document.querySelectorAll('input[name="type"]');
+typeRadios.forEach(radio => {
+    radio.addEventListener("change", handleTypeChange);
+});
+
+// Llama a handleTypeChange para mostrar los detalles iniciales según el tipo seleccionado
+handleTypeChange();
+    
+
+
+
+
+
+    
+</script>

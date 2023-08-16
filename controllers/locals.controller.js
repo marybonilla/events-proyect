@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Local = require('../models/local.model')
 const createError = require('http-errors');
 
-const LOCALS_PER_PAGE = 4;
+const LOCALS_PER_PAGE = 16;
 
 module.exports.list = (req, res, next) => {
     const { restaurant, bar, cafeteria, page = 1 } = req.query;
@@ -53,4 +53,46 @@ module.exports.list = (req, res, next) => {
   
       })
       .catch(next)
-  }
+}
+
+
+module.exports.create = (req, res, next) => {
+    res.render('local/new', {});
+};
+
+
+module.exports.doCreate = (req, res, next) => {
+    const renderWithErrors = (errors) => {
+        res.render('local/new', {
+          local: req.body,
+          errors
+        })
+    }
+   
+
+    const data = {
+        ...req.body,
+        owner: req.user._id,
+        image: req.file ? req.file.path : undefined,
+        //location: JSON.parse(req.body.location),
+    }
+    console.log(req.body)
+    console.log("Controlador doCreate llamado");
+    Local.create(data)
+    .then(local => {
+        console.log("Local creado exitosamente:", local);
+        res.redirect('/locals');
+      })
+    .catch(err => {
+      if (err instanceof mongoose.Error.ValidationError) {
+        console.log(err)
+        renderWithErrors(err.errors);
+      } else {
+        next(err);
+      }
+    })
+
+
+
+
+};

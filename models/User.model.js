@@ -43,12 +43,12 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-//userSchema.virtual('artworks', {
-//ref: 'Artwork',
-  //foreignField: 'owner',
-  //localField: '_id',
-  //justOne: false
-//});
+userSchema.virtual('locals', {
+ref: 'Local',
+foreignField: 'owner',
+localField: '_id',
+  justOne: false
+});
 
 userSchema.pre('save', function(next) {
   if (this.isModified('password')) {

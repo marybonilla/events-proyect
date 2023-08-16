@@ -6,31 +6,34 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
+        {{#unless currentUser}}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/register">Regrister</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/login">Log-in</a>
         </li>
+        {{else}}
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Locals
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/locals">All Locals</a></li>
+            <li><a class="dropdown-item" href="/locals/create">Create new local</a></li>
+            <li><a class="dropdown-item" href="#">Edit local</a></li>
+            <li><a class="dropdown-item" href="#">All events</a></li>
+            <li><a class="dropdown-item" href="#">Create new event</a></li>
+            <li><a class="dropdown-item" href="#">Edit event</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/logout">log out</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/locals">Locals</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+        {{/unless}}
       </ul>
     </div>
   </div>

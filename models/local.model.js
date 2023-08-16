@@ -8,12 +8,12 @@ const localSchema = new Schema(
       type: String,
       required: [true, REQUIRED_FIELD],
     },
-    address: {
-      type: String,
-      required: true,
-    },
+    //address: {
+      //type: String,
+      //required: true,
+    //},
     location: {
-      type: [Number, Number],
+      type: String,
       required: true,
     },
     image: {
@@ -27,44 +27,26 @@ const localSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ['Restaurant', 'Bar', 'Cafeteria'],
-      required: true,
+      enum: ['restaurant', 'bar', 'cafeteria'],
+      required: [true, REQUIRED_FIELD],
     },
     restaurantDetails: {
-      type: {
-        typeOfCuisine: {
           type: String,
           enum: ['Mexican', 'European', 'Mediterranean', 'Italian', 'Latin', 'Indian', 'Asian', 'Street food'],
-        },
-        capacity: {
-          type: Number,
           required: function () {
-            return this.type === 'restaurant';
-          },
-        },
-      },
-      required: function () {
-        return this.type === 'restaurant';
+          return this.type === 'restaurant';
       },
     },
     barDetails: {
-      type: {
-        typeBar: {
           type: String,
-          enum: ['tapas bar', 'wine bar', 'lounge bar', 'pub', 'hotel bar', 'tavern', 'canteen bar'],
-        },
-      },
-      required: function () {
-        return this.type === 'bar';
+          enum: ['Tapas bar', 'Wine bar', 'Lounge bar', 'Pub', 'Hotel bar', 'Tavern', 'Canteen bar'],
+          required: function () {
+          return this.type === 'bar';
       },
     },
     cafeteriaDetails: {
-      type: {
-        typeCafeteria: {
-          type: String,
-          enum: ['Breakfast shop', 'Pastry shop', 'Coworking', 'Bistro', 'Library', 'Vegan'],
-        },
-      },
+      type: String,
+      enum: ['Breakfast shop', 'Pastry shop', 'Coworking', 'Bistro', 'Library', 'Vegan'],
       required: function () {
         return this.type === 'cafeteria';
       },
@@ -74,8 +56,9 @@ const localSchema = new Schema(
       required: true,
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: 'User',
+      required: false,
     },
   },
   { timestamps: true },

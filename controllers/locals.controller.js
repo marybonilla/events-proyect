@@ -31,14 +31,12 @@ module.exports.list = (req, res, next) => {
             restaurant,
             bar,
             cafeteria,
-          hasFilter: restaurant || bar || cafeteria
-        
+            hasFilter: restaurant || bar || cafeteria
         };
   
         return Local.count(query)
           .then(count => {
             const maxPages = count / LOCALS_PER_PAGE
-  
             console.log(maxPages)
             res.render(
               'local/list',
@@ -53,6 +51,69 @@ module.exports.list = (req, res, next) => {
   
       })
       .catch(next)
+}
+
+/*
+module.exports.detail = (req, res, next) => {
+    Local.findById(req.params.id)
+      .populate('verifications')
+      .then(local => {
+        const positiveVerifications = local.verifications.filter(verification => verification.validation).length;
+        const negativeVerifications = local.verifications.filter(verification => !verification.validation).length;
+  
+        const userVerification = local.verifications.find(verification => verification.user.toString() === req.user._id.toString());
+        const userPositive = userVerification && userVerification.validation === true;
+        const userNegative = userVerification && userVerification.validation === false;
+  
+        if (local) {
+          return Local.find({ type: local.type, _id: { $not: { $eq: local._id } } })
+            .limit(3)
+            .sort({ createdAt: 'desc' })
+            .then((relatedLocals) => {
+              res.render(
+                'local/detail',
+                { 
+                  local, positiveVerifications,
+                  negativeVerifications, userPositive,
+                  userNegative, relatedLocals
+                }
+              );
+            })
+        } else {
+          next(createError(404, 'Local not found'));
+        }
+      })
+      .catch(next)
+  }*/
+
+
+  module.exports.detail = (req, res, next) => {
+    const { id } = req.params
+
+    function formatCoordinates(coordinates) {
+        console.log(coordinates)
+        if (coordinates.length !== 2) {
+            return "Invalid coordinates";
+        }
+        
+        const formattedString = `${coordinates[0]}, ${coordinates[1]}`;
+        return formattedString;
+    }
+
+    Local.findById(id)
+    .populate ('owner')
+    .then(local => {
+        local.location = formatCoordinates(JSON.parse(local.location))
+        res.render('local/detail', { 
+            local,
+            isBar: local.type === "bar",
+            isRestaurant: local.type === "restaurant",
+            isCafeteria: local.type === "cafeteria"
+         })
+    })
+    .catch(err => {
+        console.error(err)
+    })
 }
 
 
@@ -91,8 +152,16 @@ module.exports.doCreate = (req, res, next) => {
         next(err);
       }
     })
-
-
-
-
 };
+
+module.exports.editFormGet = (req, res, next) => {
+    const { id } = req.params;
+    Local.findById(id)
+    .then(local => {
+      res.render('local/edit', { 
+        local,
+        isEdit: true });
+    })
+    .catch(err => next(err));
+};
+

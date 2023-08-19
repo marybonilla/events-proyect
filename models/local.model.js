@@ -8,10 +8,10 @@ const localSchema = new Schema(
       type: String,
       required: [true, REQUIRED_FIELD],
     },
-    //address: {
-      //type: String,
-      //required: true,
-    //},
+    address: {
+      type: String,
+      required: true,
+    },
     location: {
       type: String,
       required: true,
@@ -63,6 +63,13 @@ const localSchema = new Schema(
   },
   { timestamps: true },
 );
+
+localSchema.virtual('verifications', {
+  ref: 'Verification',
+  foreignField: 'local',
+  localField: '_id',
+  justOne: false,
+})
 
 
 const Local = mongoose.model('Local', localSchema);

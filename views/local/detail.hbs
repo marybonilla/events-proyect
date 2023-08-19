@@ -1,0 +1,98 @@
+<script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js"></script>
+<h1>detalles</h1>
+
+
+<div class="container">
+    <div class="box">
+        <div class="local-i">
+            <img src="{{local.image}}" alt="{{local.name}}">
+        </div>
+        <div>
+            <h4> create {{local.owner.username}} </h4>
+            <p> address: <strong> {{local.address}} </strong></p>
+            <div class="starts">
+                <div class="rating">
+                    <input value="5" name="rating" id="star5" type="radio">
+                    <label for="star5"></label>
+                    <input value="4" name="rating" id="star4" type="radio">
+                    <label for="star4"></label>
+                    <input value="3" name="rating" id="star3" type="radio">
+                    <label for="star3"></label>
+                    <input value="2" name="rating" id="star2" type="radio">
+                    <label for="star2"></label>
+                    <input value="1" name="rating" id="star1" type="radio">
+                    <label for="star1"></label>
+                </div>
+            </div>
+            
+            <h2 class="c-dark-gray font-weight-semi mb-4 mt-4">Location </h2>
+            <div class="row">
+                <mapbox-address-minimap
+                    satellite-toggle="true"
+                    can-adjust-marker="true"
+                    id="map"
+                    location="{{local.location}}"
+                >
+                </mapbox-address-minimap>
+            </div>
+            <button type="button" class="btn mt-5 btn-warning"> <a href="/locals/{{local.id}}/edit">  Edit </a></button>
+        </div>
+        <section>
+            <div class="data">
+                <h3> {{local.name}} </h3>
+                
+                <p>
+                    <span>{{local.type}}: </span>
+                    {{#if isRestaurant}}
+                        <strong>{{local.restaurantDetails}}</strong>
+                    {{else if isBar}}
+                        <strong>{{local.barDetails}}</strong>
+                    {{else if isCafeteria}}
+                        <strong>{{local.cafeteriaDetails}}</strong>
+                    {{/if}}
+                </p>
+
+                <p>
+                    capacity: <strong> {{local.capacity}} persons</strong> 
+                </p>
+            </div>
+        </section>
+
+        <section class="description"> 
+            <p> {{local.description}} </p>
+        </section>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+<div></div>
+
+
+
+
+
+<script>
+  const ACCESS_TOKEN = 'pk.eyJ1IjoiY2RlbGF0b3JyZSIsImEiOiJja3Y5bHJ6ZzcweG0yMnZtZzI4eXJna2UxIn0.m-OWQWPhRrb5ZNRz0M9AqQ';
+  const minimap = document.querySelector('mapbox-address-minimap')
+  const coordinates = minimap.getAttribute('location').split(',');
+  const script = document.getElementById('search-js');
+
+  script.onload = () => {
+    minimap.accessToken = ACCESS_TOKEN;
+   minimap.onSaveMarkerLocation = (coordinate) => { console.log(coordinate); }
+    minimap.feature = {
+      type: 'Feature',
+     geometry: { type: 'Point', coordinates: coordinates },
+      properties: {}
+    };
+  }
+</script>

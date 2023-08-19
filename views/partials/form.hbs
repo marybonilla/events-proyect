@@ -1,7 +1,7 @@
 <script id="search-js" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js" defer></script>
 
 {{#if edit }}
- <h1>edit</h1>
+ <h1>Edit</h1>
   <form action="/locals/{{local.id}}/edit" method="POST" enctype="multipart/form-data">
 {{else}}
  <h1>Create New Local</h1>
@@ -18,9 +18,10 @@
     {{/if}}
   </div>
 
-  <div class="form-group mb-1">
+  <div class="form-group mb-5">
     <label for="location">Location</label>
     <input
+      value="{{local.address}}"
       type="text"
       class="form-control"
       id="mapbox-autofill"
@@ -37,11 +38,11 @@
   <input name="location" type="hidden" id="mapbox-autofill-location">
   <input name="address" type="hidden" id="mapbox-autofill-address">
 
-  <div id="minimap-container" class="hidden" style="height: 200px; width: 600px;"></div>
+  <div id="minimap-container" class="hidden" style="height: 200px; width: 600px; margin-bottom:50px;"></div>
 
   <div class="mb-3">
       <label for="image" class="form-label">Image</label>
-      <input class="form-control" type="file" id="image" name="image">
+      <input class="form-control" type="file" id="image" name="image" value="{{local.image}}">
     </div>
 
   <div class="form-group mb-1">

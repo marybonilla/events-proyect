@@ -1,18 +1,20 @@
 <h1 class="mt-4">Locals</h1>
 
 <div class="row">
-<div class="d-flex justify-content-between flex-wrap">
-{{#each locals}}
-<div class="card" style="width: 18rem;">
-  <img src={{image}} class="card-img-top" alt={{name}}>
-  <div class="card-body">
-    <h5 class="card-title"> {{name}} </h5>
-    <h6 class="card-title"> {{type}} </h6>
-    <p class="card-text"> {{description}} </p>
-    <h6 class="card-title"> Capacity: {{capacity}} persons </h6>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+  {{#each locals}}
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      
+      <div class="card-image">
+        <img src={{image}} class="card-img-top" alt={{name}}>
+      </div>
+      <p class="card-title">{{name}}</p>
+      <p class="card-title">{{type}}</p>
+      <h6 class="card-title"> Capacity: {{capacity}} persons </h6>
+      <a href="/locals/{{this._id}}" class="btn btn-primary">Details</a>
+      <p class="footer">Created by {{owner.username}} <span class="by-name"></span> </p>
+      
+    </div>
   </div>
-</div>
-{{/each}}
-</div>
+  {{/each}}
 </div>

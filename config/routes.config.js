@@ -3,6 +3,7 @@ const miscController = require ('../controllers/misc.controller');
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
 const localsController = require('../controllers/locals.controller');
+//const verificationsController = require('../controllers/verifications.controller');
 
 
 const authMiddleware = require('../middlewares/auth.middleware');
@@ -34,5 +35,13 @@ router.get('/profile/:id', authMiddleware.isAuthenticated, usersController.getUs
 router.get('/locals',authMiddleware.isAuthenticated, localsController.list);
 router.post('/locals/create',authMiddleware.isAuthenticated, upload.single('image'), localsController.doCreate);
 router.get('/locals/create',authMiddleware.isAuthenticated, localsController.create);
+router.get('/locals/:id', authMiddleware.isAuthenticated, localsController.detail);
+router.get('/locals/:id/edit', authMiddleware.isAuthenticated,localsController.editFormGet);
+
+
+/* Verification */
+
+// router.get('/artworks/:id/verifications', )
+//router.post('/artworks/:id/verify', authMiddleware.isAuthenticated, verificationsController.create);
 
 module.exports = router;

@@ -3,6 +3,7 @@ const miscController = require ('../controllers/misc.controller');
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
 const localsController = require('../controllers/locals.controller');
+const eventsController = require('../controllers/events.controller');
 //const verificationsController = require('../controllers/verifications.controller');
 
 
@@ -35,10 +36,21 @@ router.get('/profile/:id', authMiddleware.isAuthenticated, usersController.getUs
 router.get('/locals',authMiddleware.isAuthenticated, localsController.list);
 router.post('/locals/create',authMiddleware.isAuthenticated, upload.single('image'), localsController.doCreate);
 router.get('/locals/create',authMiddleware.isAuthenticated, localsController.create);
-router.get('/locals/:id', authMiddleware.isAuthenticated, localsController.detail);
+
 router.get('/locals/:id/edit', authMiddleware.isAuthenticated,localsController.editFormGet);
+router.post('/locals/:id/edit', authMiddleware.isAuthenticated, upload.single('image'),localsController.formPost);
 
+router.get('/locals/:id', authMiddleware.isAuthenticated, localsController.detail);
 
+/* Event */
+
+router.get('/events', authMiddleware.isAuthenticated, eventsController.listEvent);
+router.get ('/events/create', authMiddleware.isAuthenticated, upload.single('image'), eventsController.createEvent);
+router.post('/events', authMiddleware.isAuthenticated, upload.single('image'), eventsController.doCreateEvent);
+
+router.get('/events/:id/edit', authMiddleware.isAuthenticated,eventsController.editFormEvent);
+router.post('/events/:id/edit', authMiddleware.isAuthenticated, upload.single('image'), eventsController.postFormEvent);
+router.get('/events/:id', authMiddleware.isAuthenticated, eventsController.detailEvent);
 /* Verification */
 
 // router.get('/artworks/:id/verifications', )

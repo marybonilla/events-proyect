@@ -20,19 +20,28 @@ const eventSchema = new Schema(
     cost: {
       type: Number,
       required: true,
-      address: {
+    },
+     address: {
+      type: String,
+      required: true,
+      },
+      location: {
         type: String,
         required: true,
       },
-      location: {
-        type: [Number, Number],
-        required: true,
+      eventDate: {
+        type: Date,
+        required: [true, REQUIRED_FIELD]
       },
-    },
+      eventTime: {
+        type: String,
+        required: [true, REQUIRED_FIELD]
+      },
+    
     local: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Local',
-      required: true,
+      required: false,
     },
   },
   {

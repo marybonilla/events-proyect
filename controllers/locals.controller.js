@@ -91,7 +91,7 @@ module.exports.detail = (req, res, next) => {
     const { id } = req.params
 
     function formatCoordinates(coordinates) {
-        console.log(coordinates)
+        //console.log(coordinates)
         if (coordinates.length !== 2) {
             return "Invalid coordinates";
         }
@@ -138,10 +138,10 @@ module.exports.doCreate = (req, res, next) => {
         //location: JSON.parse(req.body.location),
     }
     console.log(req.body)
-    console.log("Controlador doCreate llamado");
+    //console.log("Controlador doCreate llamado");
     Local.create(data)
     .then(local => {
-        console.log("Local creado exitosamente:", local);
+        //console.log("Local creado exitosamente:", local);
         res.redirect('/locals');
       })
     .catch(err => {
@@ -163,5 +163,15 @@ module.exports.editFormGet = (req, res, next) => {
         isEdit: true });
     })
     .catch(err => next(err));
+};
+
+module.exports.formPost = (req, res, next) => {
+    const { id } = req.params;
+    console.log(req.body);
+    Local.findByIdAndUpdate(id, req.body, { new: true })
+    .then(local => {
+      res.redirect(`/locals/${local._id}`);
+    })
+    .catch(err => next(err))
 };
 

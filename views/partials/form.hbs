@@ -1,6 +1,6 @@
 <script id="search-js" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js" defer></script>
 
-{{#if edit }}
+{{#if isEdit }}
  <h1>Edit</h1>
   <form action="/locals/{{local.id}}/edit" method="POST" enctype="multipart/form-data">
 {{else}}
@@ -35,8 +35,8 @@
     {{/if}}
   </div>
 
-  <input name="location" type="hidden" id="mapbox-autofill-location">
-  <input name="address" type="hidden" id="mapbox-autofill-address">
+<input name="location" value="{{local.location}}" type="hidden" id="mapbox-autofill-location">
+  <input name="address" value="{{local.address}}" type="hidden" id="mapbox-autofill-address">
 
   <div id="minimap-container" class="hidden" style="height: 200px; width: 600px; margin-bottom:50px;"></div>
 
@@ -69,7 +69,7 @@
     <legend class="col-form-label col-sm-2 pt-0">Type</legend>
     <div class="col-sm-3">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultRestaurant" value="restaurant">
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultRestaurant" value="restaurant" checked>
             <label class="form-check-label" for="flexRadioDefault1">
                 Restaurant
             </label>
@@ -108,7 +108,7 @@
 
         <div class="form-group mb-3" id="barDetailsSection" style="display: none;">
             <select name="barDetails" class="form-select" aria-label="Default select example" required>
-                <option value="" selected disabled>Select Type Of Bar</option>
+                <option selected>Select Type Of Bar</option>
                 <option value="Tapas bar">Tapas bar</option>
                 <option value="Wine bar">Wine bar</option>
                 <option value="Lounge bar">Lounge bar</option>

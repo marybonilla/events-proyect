@@ -1,0 +1,136 @@
+<script id="search-js" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+{{#if isEdit }}
+ <h1>Edit Event</h1>
+  <form action="/events/{{event.id}}/edit" method="POST" enctype="multipart/form-data">
+{{else}}
+ <h1>Create New Event</h1>
+  <form action="/events" method="POST" enctype="multipart/form-data">
+{{/if}}
+  <div class="form-group mb-1">
+    <label  for="name">Name event</label>
+    <input name="name" type="text" class="form-control {{#if errors.name}}is-invalid{{/if}}" id="name" placeholder="Enter name"
+      value="{{ event.name }}" required>
+    {{#if errors.name}}
+      <div class="invalid-feedback">
+        {{errors.name.message}}
+      </div>
+    {{/if}}
+  </div>
+
+  
+  <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input class="form-control" type="file" id="image" name="image" value="{{event.image}} " required>
+    </div>
+  <div class="form-group mb-1">
+    <label for="cost">Price</label>
+    <input name="cost" type="number" class="form-control {{#if errors.cost}}is-invalid{{/if}}" id="cost" placeholder="Enter Price"
+      value="{{ event.cost }}">
+    {{#if errors.cost}}
+      <div class="invalid-feedback">
+        {{errors.cost.message}}
+      </div>
+    {{/if}}
+  </div>
+  <div class="form-group mb-3">
+    <label for="eventDate">Event Date:</label>
+    <input name="eventDate" type="date" class="form-control {{#if errors.eventDate}}is-invalid{{/if}}" id="eventDate" placeholder="Enter date"
+      value="{{ event.eventDate }}" required>
+    {{#if errors.eventDate}}
+      <div class="invalid-feedback">
+        {{errors.eventDate.message}}
+      </div>
+    {{/if}}
+  </div>
+            
+  <div class="form-group mb-3">
+    <label for="eventTime">Event Time:</label>
+    <input name="eventTime" type="time" class="form-control {{#if errors.eventTime}}is-invalid{{/if}}" id="eventTime" placeholder="Enter time"
+      value="{{ event.eventTime }}" required>
+    {{#if errors.eventTime}}
+      <div class="invalid-feedback">
+        {{errors.eventTime.message}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="form-group mb-1">
+    <label for="text">Description</label>
+    <textarea name="description" type="text" class="form-control html-editor {{#if errors.description}}is-invalid{{/if}}" id="text"
+      placeholder="Enter restaurant description" rows="10">{{ event.description }}</textarea>
+    {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>
+    {{/if}}
+  </div>
+
+    <div class="form-group mb-5">
+    <label for="location">Location</label>
+    <input
+      value="{{event.address}}"
+      type="text"
+      class="form-control"
+      id="mapbox-autofill"
+      placeholder="Start typing your address, e.g. Pintor Ignacio de..."
+      autocomplete="address-line1"
+    >
+    {{#if errors.location}}
+      <div class="invalid-feedback">
+        {{errors.location.message}}
+      </div>
+    {{/if}}
+  </div>
+
+  <input name="location" type="hidden" id="mapbox-autofill-location">
+  <input name="address" type="hidden" id="mapbox-autofill-address">
+
+  <div id="minimap-container" class="hidden" style="height: 200px; width: 600px; margin-bottom:50px;"></div>
+
+
+
+  <button type="submit" class="btn btn-primary mb-5">Send</button>
+</form>
+
+
+<script>
+  const ACCESS_TOKEN = 'pk.eyJ1IjoiY2RlbGF0b3JyZSIsImEiOiJja3Y5bHJ6ZzcweG0yMnZtZzI4eXJna2UxIn0.m-OWQWPhRrb5ZNRz0M9AqQ';
+
+  let autofillCollection;
+  let minimap;
+
+  const minimapContainer = document.getElementById("minimap-container");
+  const addressInput = document.getElementById("mapbox-autofill");
+  const locationInput = document.getElementById("mapbox-autofill-location");
+  const addressInputText = document.getElementById("mapbox-autofill-address");
+
+  // Autofill initialization
+  document.getElementById("search-js").onload = () => {
+    mapboxsearch.config.accessToken = ACCESS_TOKEN;
+    
+    autofillCollection = mapboxsearch.autofill({});
+    
+    minimap = new MapboxAddressMinimap();
+    minimap.canAdjustMarker = true;
+    minimap.satelliteToggle = true;
+    minimap.onSaveMarkerLocation = (lnglat) => {
+      console.log(`Marker moved to ${lnglat}`);
+    };
+    const minimapContainer = document.getElementById("minimap-container");
+    minimapContainer.appendChild(minimap);
+    
+    autofillCollection.addEventListener(
+      "retrieve",
+      async (e) => {
+        if (minimap) {
+          minimap.feature = e.detail.features[0];
+          minimapContainer.classList.remove("hidden");
+        }
+        console.log(e.detail.features[0]);
+        locationInput.value = JSON.stringify(e.detail.features[0].geometry.coordinates);
+        addressInputText.value = e.detail.features[0].properties.address_line1;
+      }
+    );
+  };
+</script>
+
+

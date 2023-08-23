@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "nodemon app.js -e hbs,js,css"
+    "dev": "nodemon app.js -e hbs,js,css",
+    "seeds": "node ./bin/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,6 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
-    "faker": "^6.6.6",
     "hbs": "^4.2.0",
     "http-errors": "^2.0.0",
     "mongoose": "^7.4.1",

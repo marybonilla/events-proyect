@@ -10,7 +10,6 @@ const localSchema = new Schema(
     },
     address: {
       type: String,
-      required: true,
     },
     location: {
       type: String,
@@ -27,7 +26,7 @@ const localSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ['restaurant', 'bar', 'cafeteria'],
+      enum: ['Restaurant', 'Bar', 'Cafeteria'],
       required: [true, REQUIRED_FIELD],
     },
     restaurantDetails: {
@@ -39,7 +38,7 @@ const localSchema = new Schema(
     },
     barDetails: {
           type: String,
-          enum: ['Tapas bar', 'Wine bar', 'Lounge bar', 'Pub', 'Hotel bar', 'Tavern', 'Canteen bar'],
+          enum: ['Tapas Bar', 'Wine Bar', 'Lounge Bar', 'Pub', 'Hotel Bar', 'Tavern', 'Canteen Bar'],
           required: function () {
           return this.type === 'bar';
       },

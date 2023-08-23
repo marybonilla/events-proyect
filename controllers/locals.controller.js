@@ -5,20 +5,20 @@ const createError = require('http-errors');
 const LOCALS_PER_PAGE = 16;
 
 module.exports.list = (req, res, next) => {
-    const { restaurant, bar, cafeteria, page = 1 } = req.query;
+    const { Restaurant, Bar, Cafeteria, page = 1 } = req.query;
   
     const currentPage = Number(page);
   
     const query = {};
   
-    if (restaurant) {
-      query.restaurant = restaurant;
+    if (Restaurant) {
+      query.Restaurant = Restaurant;
     }
-    if (bar) {
-      query.bar = bar;
+    if (Bar) {
+      query.Bar = Bar;
     }
-    if (cafeteria) {
-        query.cafeteria = cafeteria;
+    if (Cafeteria) {
+        query.Cafeteria = Cafeteria;
       }
   
     Local.find(query)
@@ -28,10 +28,10 @@ module.exports.list = (req, res, next) => {
       .populate('owner')
       .then(locals => {
         const viewQuery = {
-            restaurant,
-            bar,
-            cafeteria,
-            hasFilter: restaurant || bar || cafeteria
+            Restaurant,
+            Bar,
+            Cafeteria,
+            hasFilter: Restaurant || Bar || Cafeteria
         };
   
         return Local.count(query)
@@ -106,9 +106,9 @@ module.exports.detail = (req, res, next) => {
         local.location = formatCoordinates(JSON.parse(local.location))
         res.render('local/detail', { 
             local,
-            isBar: local.type === "bar",
-            isRestaurant: local.type === "restaurant",
-            isCafeteria: local.type === "cafeteria"
+            isBar: local.type === "Bar",
+            isRestaurant: local.type === "Restaurant",
+            isCafeteria: local.type === "Cafeteria"
          })
     })
     .catch(err => {

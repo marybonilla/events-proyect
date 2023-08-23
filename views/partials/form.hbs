@@ -48,7 +48,7 @@
   <div class="form-group mb-1">
     <label for="text">Description</label>
     <textarea name="description" type="text" class="form-control html-editor {{#if errors.description}}is-invalid{{/if}}" id="text"
-      placeholder="Enter restaurant description" rows="10">{{ local.description }}</textarea>
+      placeholder="Enter Restaurant description" rows="10">{{ local.description }}</textarea>
     {{#if errors.description}}<div class="invalid-feedback">{{errors.description}}</div>
     {{/if}}
   </div>
@@ -69,20 +69,20 @@
     <legend class="col-form-label col-sm-2 pt-0">Type</legend>
     <div class="col-sm-3">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultRestaurant" value="restaurant" checked>
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultRestaurant" value="Restaurant" checked>
             <label class="form-check-label" for="flexRadioDefault1">
                 Restaurant
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultBar" value="bar" checked>
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultBar" value="Bar" checked>
             <label class="form-check-label" for="flexRadioDefault2">
                 Bar
             </label>
             
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultCafeteria" value="cafeteria" checked>
+            <input class="form-check-input" type="radio" name="type" id="flexRadioDefaultCafeteria" value="Cafeteria" checked>
             <label class="form-check-label" for="flexRadioDefault2">
                 Cafeteria
             </label>
@@ -109,13 +109,13 @@
         <div class="form-group mb-3" id="barDetailsSection" style="display: none;">
             <select name="barDetails" class="form-select" aria-label="Default select example" required>
                 <option selected>Select Type Of Bar</option>
-                <option value="Tapas bar">Tapas bar</option>
-                <option value="Wine bar">Wine bar</option>
-                <option value="Lounge bar">Lounge bar</option>
+                <option value="Tapas bar">Tapas Bar</option>
+                <option value="Wine Bar">Wine Bar</option>
+                <option value="Lounge Bar">Lounge Bar</option>
                 <option value="Pub">Pub</option>
-                <option value="Hotel bar">Hotel bar</option>
+                <option value="Hotel Bar">Hotel Bar</option>
                 <option value="Tavern">Tavern</option>
-                <option value="Canteen bar">Canteen bar</option>
+                <option value="Canteen Bar">Canteen Bar</option>
             </select>
         </div>
 
@@ -202,13 +202,13 @@
         <div class="form-group mb-3" id="barDetailsSection" >
                 <select name="barDetails" class="form-select" aria-label="Default select example">
                     <option selected>Type Of Bar</option>
-                    <option value="Tapas bar">Tapas bar</option>
-                    <option value="Wine bar">Wine bar</option>
-                    <option value="Lounge bar">Lounge bar</option>
+                    <option value="Tapas Bar">Tapas Bar</option>
+                    <option value="Wine Bar">Wine Bar</option>
+                    <option value="Lounge Bar">Lounge Bar</option>
                     <option value="Pub">Pub</option>
-                    <option value="Hotel bar">Hotel bar</option>
+                    <option value="Hotel Bar">Hotel Bar</option>
                     <option value="Tavern">Tavern</option>
-                    <option value="Canteen bar">Canteen bar</option>
+                    <option value="Canteen Bar">Canteen Bar</option>
                     
                 </select>
         </div>`;
@@ -234,11 +234,11 @@
     const handleTypeChange = () => {
     const selectedType = document.querySelector('input[name="type"]:checked').value;
     let detailsHTML = "";
-    if (selectedType === "restaurant") {
+    if (selectedType === "Restaurant") {
         detailsHTML = restaurantDetailsHTML;
-    } else if (selectedType === "bar") {
+    } else if (selectedType === "Bar") {
         detailsHTML = barDetailsHTML;
-    } else if (selectedType === "cafeteria") {
+    } else if (selectedType === "Cafeteria") {
         detailsHTML = cafeteriaDetailsHTML;
     }
     

@@ -4,6 +4,7 @@ const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
 const localsController = require('../controllers/locals.controller');
 const eventsController = require('../controllers/events.controller');
+const likesController = require ('../controllers/likes.controller');
 //const verificationsController = require('../controllers/verifications.controller');
 
 
@@ -51,6 +52,12 @@ router.post('/events', authMiddleware.isAuthenticated, upload.single('image'), e
 router.get('/events/:id/edit', authMiddleware.isAuthenticated,eventsController.editFormEvent);
 router.post('/events/:id/edit', authMiddleware.isAuthenticated, upload.single('image'), eventsController.postFormEvent);
 router.get('/events/:id', authMiddleware.isAuthenticated, eventsController.detailEvent);
+
+/* likes */
+
+router.post("/likes/:userId/:eventId", authMiddleware.isAuthenticated, likesController.create);
+
+
 /* Verification */
 
 // router.get('/artworks/:id/verifications', )

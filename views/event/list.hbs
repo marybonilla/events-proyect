@@ -24,6 +24,13 @@
           <div class="image-preview">
             <img src="{{image}}" alt="{{name}}" />
           </div>
+
+          <button data-user="{{../currentUser._id}}" data-name="{{this.name}}" data-id="{{this._id}}" type="submit" 
+          class="btn btn-warning  {{#userLikedEvent likes=../likes event=this}}btn-danger{{/userLikedEvent}} like-button">
+              <i class="fa fa-heart"></i>
+          </button>
+
+          <!--
           <div class="comment-like">
             <span><svg
                 fill=""
@@ -72,7 +79,7 @@
                                 6.51285 16.3459 5.81792C15.2937 5.123 14.0609 4.75171 12.8 4.74999Z"
                   ></path>
                 </g></svg>4</span>
-          </div>
+          </div> -->
 
           <a href="/events/{{this._id}}" class="btn btn-primary">Details</a>
 
@@ -84,24 +91,31 @@
   </div>
 </div>
 
-<!--
-    <div class="row">
-  {{#each events}}
-  <div class="col-md-4 mb-4">
-    <div class="card">
-      
-      <div class="card-image">
-        <img src={{image}} class="card-img-top" alt={{name}}>
-      </div>
-      <p class="card-title">{{name}}</p>
-    
-      <h6 class="card-title"> Capacity: {{capacity}} </h6>
-      <a href="/events/{{this._id}}" class="btn btn-primary">Details</a>
-      <p class="footer">Created by <span class="by-name"></span> </p>
-      
-    </div>
-  </div>
-  {{/each}}
-</div>
 
--->
+
+
+
+
+<script>
+  const likeButtons = document.querySelectorAll('.like-button')
+
+likeButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const userId = btn.dataset.user; // Obtener userId del atributo data-user
+    const eventId = btn.dataset.id;   // Obtener eventId del atributo data-id
+
+    console.log(`http://localhost:3000/likes/${userId}/${eventId}`);
+    axios.post(`http://localhost:3000/likes/${userId}/${eventId}`)
+      .then(response => {
+        if (response.data === 'DELETED') {
+          btn.classList.remove('btn-danger');
+          btn.classList.add('btn-warning');
+        } else {
+          btn.classList.remove('btn-warning');
+          btn.classList.add('btn-danger');
+        }
+      })
+      .catch(err => console.log(err))
+  })
+})
+</script>

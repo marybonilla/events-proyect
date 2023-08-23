@@ -1,106 +1,133 @@
-<h1>Register</h1>
+{{> navbar}}
 
-<form action="/register" method="POST" enctype="multipart/form-data">
-  <div class="row mb-3 justify-content-center">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
-    <div class="col-sm-3">
-      <input class="form-control{{#if errors.username}} is-invalid{{/if}}"
-      value="{{user.username}}" type="username" name = "username" class="form-control" placeholder="Username" id="inputEmail3" required>
-      {{#if errors.username}}
-      <div class="invalid-feedback">
-        {{errors.username}}
-      </div>
-    {{/if}}
-    </div>
-  </div>
-  <div class="row mb-3 justify-content-center">
-    <label for="input-Email3" class="col-sm-2 col-form-label" >Email</label>
-    <div class="col-sm-3">
-      <input class="form-control{{#if errors.email}} is-invalid{{/if}}"
-      value="{{user.email}}" name = "email" type="email" class="form-control" placeholder="user@example.org" id="input-Email3" required>
-      {{#if errors.email}}
-      <div class="invalid-feedback">
-        {{errors.email}}
-      </div>
-    {{/if}}
-    </div>
-  </div>
-  <div class="row mb-3 justify-content-center">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Avatar</label>
-    <div class="col-sm-3">
-      <input type="file" class="form-control" name="avatar" placeholder="Avatar" id="avatar">
-    </div>
-  </div>
-  <div class="row mb-3 justify-content-center">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-3">
-      <input class="form-control{{#if errors.password}} is-invalid{{/if}}"
-      type="password" name="password" class="form-control" placeholder="**********" id="password" required>
-      {{#if errors.password}}
-      <div class="invalid-feedback">
-        {{errors.password}}
-      </div>
-    {{/if}}
-    </div>
-  </div>
-  <div class="row mb-3 justify-content-center">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Repete Password</label>
-    <div class="col-sm-3">
-      <input type="password" name="repeatPassword" class="form-control" placeholder="**********" id="repeatPassword" required>
-    </div>
-  </div>
-  <fieldset class="row mb-3 justify-content-center">
-    <legend class="col-form-label col-sm-2 pt-0">Roles</legend>
-    <div class="col-sm-3">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="role" id="flexRadioDefault1" value="creator">
-            <label class="form-check-label" for="flexRadioDefault1">
-                Creator
-            </label>
+<div class="bg-register">
+    <div class="container">
+      <div class="form-1">
+        <h2 class="h2-register"> Register</h2>
+        <p class="p-register">Get started with our app, just create an account and enjoy the experience</p>
+        <p class="step"><strong> First Step, select your rol </strong></p>
+    <form action="/register" method="POST" enctype="multipart/form-data">
+     <fieldset class="row mb-3 justify-content-center">
+        <legend class="col-form-label col-sm-2 pt-0">Roles</legend>
+        <div class="col-sm-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" id="flexRadioDefault1" value="Creator">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Creator
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="role" id="flexRadioDefault2" value="Guest" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Guest
+                </label>
+            </div>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="role" id="flexRadioDefault2" value="guest" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-                Guest
-            </label>
+      </fieldset>
+
+      <div class="row mb-3 justify-content-center">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-3">
+          <input class="form-control{{#if errors.username}} is-invalid{{/if}}"
+          value="{{user.username}}" type="username" name = "username" class="form-control" placeholder="Username" id="inputEmail3" required>
+          {{#if errors.username}}
+          <div class="invalid-feedback">
+            {{errors.username}}
+          </div>
+        {{/if}}
         </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <label for="input-Email3" class="col-sm-2 col-form-label" >Email</label>
+        <div class="col-sm-3">
+          <input class="form-control{{#if errors.email}} is-invalid{{/if}}"
+          value="{{user.email}}" name = "email" type="email" class="form-control" placeholder="user@example.org" id="input-Email3" required>
+          {{#if errors.email}}
+          <div class="invalid-feedback">
+            {{errors.email}}
+          </div>
+        {{/if}}
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Avatar</label>
+        <div class="col-sm-3">
+          <input type="file" class="form-control" name="avatar" placeholder="Avatar" id="avatar">
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-3">
+          <input class="form-control{{#if errors.password}} is-invalid{{/if}}"
+          type="password" name="password" class="form-control" placeholder="**********" id="password" required>
+          {{#if errors.password}}
+          <div class="invalid-feedback">
+            {{errors.password}}
+          </div>
+        {{/if}}
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <label for="inputPassword3" class="col-sm-2 col-form-label">Repete Password</label>
+        <div class="col-sm-3">
+          <input type="password" name="repeatPassword" class="form-control" placeholder="**********" id="repeatPassword" required>
+        </div>
+      </div>
+      
+      <div class="row mb-3 justify-content-center">
+      <div class="col-sm-3">
+        <div class="buttons d-flex justify-content-center">
+           <div class="submit-create">
+            <button type="submit" class="btn btn-primary ">Create</button>
+          </div>
+
+          <div class="hidden active" id="btn-google" style="display: none; margin-left:7px">
+            <a href="/login/google" class="btn btn-danger">Sign in with Google</a>
+          </div>
+
+        </div>
+      </div>
+      </div>
+    </form>
+
+
+
     </div>
-  </fieldset>
-  <div class="row mb-3 justify-content-center">
-  <div class="col-sm-3">
-  <button type="submit" class="btn btn-primary ">Create</button>
+
+  </div>
+</div>
+
+
+<script>
+  const googleBtn = `<div id="btn-google">
   <a href="/login/google" class="btn btn-danger">Sign in with Google</a>
-  </div>
-  </div>
-</form>
+</div>`;
+
+const btnGoogle = document.getElementById('btn-google');
+
+const handleTypeChange = () => {
+  console.log('Change event triggered');
+  const selectedRole = document.querySelector('input[name="role"]:checked').value;
+  if (selectedRole === 'Guest') {
+    btnGoogle.style.display = 'block';  // Mostrar el botón de Google
+  } else {
+    btnGoogle.style.display = 'none';   // Ocultar el botón de Google
+  }
+};
+
+const roleRadios = document.querySelectorAll('input[name="role"]');
+roleRadios.forEach(radio => {
+    radio.addEventListener("change", handleTypeChange);
+});
+
+handleTypeChange();
+</script>
 
 
 
-<form class="form" action="/register" method="POST" enctype="multipart/form-data">
-    <p class="title">Register </p>
-    <p class="message">Signup now and get full access to our app. </p>
-        <div class="flex">
-        <label>
-            <input required="" placeholder="" type="text" class="input">
-            <span>Username</span>
-        </label>
-        
 
-    </div>  
-            
-    <label>
-        <input required="" placeholder="" type="email" class="input">
-        <span>Email</span>
-    </label> 
-        
-    <label>
-        <input required="" placeholder="" type="password" class="input">
-        <span>Password</span>
-    </label>
-    <label>
-        <input required="" placeholder="" type="password" class="input">
-        <span>Confirm password</span>
-    </label>
-    <button class="submit">Submit</button>
-    <p class="signin">Already have an acount ? <a href="#">Signin</a> </p>
-</form>
+
+
+
+
+

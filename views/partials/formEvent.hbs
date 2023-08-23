@@ -22,7 +22,7 @@
   
   <div class="mb-3">
       <label for="image" class="form-label">Image</label>
-      <input class="form-control" type="file" id="image" name="image" value="{{event.image}} " required>
+      <input class="form-control" value="{{event.image}}" type="file" id="image" name="image" required>
     </div>
   <div class="form-group mb-1">
     <label for="cost">Price</label>
@@ -36,8 +36,8 @@
   </div>
   <div class="form-group mb-3">
     <label for="eventDate">Event Date:</label>
-    <input name="eventDate" type="date" class="form-control {{#if errors.eventDate}}is-invalid{{/if}}" id="eventDate" placeholder="Enter date"
-      value="{{ event.eventDate }}" required>
+    <input name="eventDate" value="{{ event.eventDate }}" type="date" class="form-control {{#if errors.eventDate}}is-invalid{{/if}}" id="eventDate" placeholder="Enter date"
+       required>
     {{#if errors.eventDate}}
       <div class="invalid-feedback">
         {{errors.eventDate.message}}
@@ -81,8 +81,8 @@
     {{/if}}
   </div>
 
-  <input name="location" type="hidden" id="mapbox-autofill-location">
-  <input name="address" type="hidden" id="mapbox-autofill-address">
+  <input name="location" value="{{event.location}}" type="hidden" id="mapbox-autofill-location">
+  <input name="address" value="{{event.address}}" type="hidden" id="mapbox-autofill-address">
 
   <div id="minimap-container" class="hidden" style="height: 200px; width: 600px; margin-bottom:50px;"></div>
 

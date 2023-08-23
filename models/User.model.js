@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema(
     },
     role: { 
         type: String, 
-        enum: ['creator', 'guest'], 
-        default: 'guest' 
+        enum: ['Creator', 'Guest'], 
+        
     },
     googleID: {
       type: String

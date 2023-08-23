@@ -7,7 +7,7 @@ module.exports.register = (req, res, next) => {
 }
 
 module.exports.doRegister = (req, res, next) => {
-    const { email, password, repeatPassword } = req.body
+    const { email, password, repeatPassword, role } = req.body
    
   
     const renderWithErrors = (errors) => {
@@ -100,6 +100,6 @@ module.exports.doLogin = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect('/');
   }
 

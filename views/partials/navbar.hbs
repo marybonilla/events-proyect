@@ -1,11 +1,15 @@
-<nav class="navbar navbar-expand-lg bg-light">
+
+
+<nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Home</a>
+    <a class="navbar-brand" href="/">
+      <img src="/img/logo-1.png" alt="Logo" class="logo-img">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav d-flex">
         {{#unless currentUser}}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/register">Regrister</a>
@@ -15,28 +19,36 @@
         </li>
         {{else}}
         <li class="nav-item">
-          <a class="nav-link" href="/profile">Profile</a>
+          <a class="nav-link a-color" href="/profile">Profile</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle a-color " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Locals
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/locals">All Locals</a></li>
-            <li><a class="dropdown-item" href="/locals/create">Create new local</a></li>
+            <li><a class="dropdown-item a-color" href="/locals">All Locals</a></li>
+            <li><a class="dropdown-item a-color" href="/locals/create">Create new local</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle a-color" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Events
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/events">All Events</a></li>
-            <li><a class="dropdown-item" href="/events/create">Create new event</a></li>
+            <li><a class="dropdown-item a-color" href="/events">All Events</a></li>
+            <li><a class="dropdown-item a-color" href="/events/create">Create new event</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">log out</a>
+          <a class="nav-link a-color" href="/logout">log out</a>
+        </li>
+        <li class="nav-item">
+            <div class="avatar-container">
+              <a class="nav-link" href="/profile">
+              <img src="{{user.avatar}}" alt="Avatar" class="avatar-img">
+              </a>
+            </div>
+          
         </li>
         {{/unless}}
       </ul>

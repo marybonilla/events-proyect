@@ -1,10 +1,10 @@
 <script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js"></script>
 
 {{> navbar}}
-<h1>detalles</h1>
-
 
 <div class="container">
+    <h1>Details</h1>
+
     <div class="box">
         <div class="local-i">
             <img src="{{local.image}}" alt="{{local.name}}">
@@ -26,75 +26,58 @@
                     <label for="star1"></label>
                 </div>
             </div>
-            
+
             <h2 class="c-dark-gray font-weight-semi mb-4 mt-4">Location </h2>
             <div class="row">
-                <mapbox-address-minimap
-                    satellite-toggle="true"
-                    can-adjust-marker="true"
-                    id="map"
-                    location="{{local.location}}"
-                >
+                <mapbox-address-minimap satellite-toggle="true" can-adjust-marker="true" id="map"
+                    location="{{local.location}}">
                 </mapbox-address-minimap>
             </div>
-            <button type="button" class="btn mt-5 btn-warning"> <a href="/locals/{{local.id}}/edit">  Edit </a></button>
+            <button type="button" class="btn mt-5 btn-warning"> <a href="/locals/{{local.id}}/edit"> Edit </a></button>
         </div>
         <section>
             <div class="data">
                 <h3> {{local.name}} </h3>
-                
+
                 <p>
                     <span>{{local.type}}: </span>
                     {{#if isRestaurant}}
-                        <strong>{{local.restaurantDetails}}</strong>
+                    <strong>{{local.restaurantDetails}}</strong>
                     {{else if isBar}}
-                        <strong>{{local.barDetails}}</strong>
+                    <strong>{{local.barDetails}}</strong>
                     {{else if isCafeteria}}
-                        <strong>{{local.cafeteriaDetails}}</strong>
+                    <strong>{{local.cafeteriaDetails}}</strong>
                     {{/if}}
                 </p>
 
                 <p>
-                    capacity: <strong> {{local.capacity}} persons</strong> 
+                    capacity: <strong> {{local.capacity}} persons</strong>
                 </p>
             </div>
         </section>
 
-        <section class="description"> 
+        <section class="description">
             <p> {{local.description}} </p>
         </section>
     </div>
-    
+
+
 </div>
 
 
-
-
-
-
-
-
-
-
-<div></div>
-
-
-
-
-
 <script>
-  const ACCESS_TOKEN = 'pk.eyJ1IjoiY2RlbGF0b3JyZSIsImEiOiJja3Y5bHJ6ZzcweG0yMnZtZzI4eXJna2UxIn0.m-OWQWPhRrb5ZNRz0M9AqQ';
-  const minimap = document.querySelector('mapbox-address-minimap')
-  const coordinates = minimap.getAttribute('location').split(',');
-  const script = document.getElementById('search-js');
+    const ACCESS_TOKEN = 'pk.eyJ1IjoiY2RlbGF0b3JyZSIsImEiOiJja3Y5bHJ6ZzcweG0yMnZtZzI4eXJna2UxIn0.m-OWQWPhRrb5ZNRz0M9AqQ';
+    const minimap = document.querySelector('mapbox-address-minimap')
+    const coordinates = minimap.getAttribute('location').split(',');
+    const script = document.getElementById('search-js');
 
-  script.onload = () => {
-    minimap.accessToken = ACCESS_TOKEN;
-   minimap.onSaveMarkerLocation = (coordinate) => { console.log(coordinate); }
-    minimap.feature = {
-      type: 'Feature',
-     geometry: { type: 'Point', coordinates: coordinates },
-      properties: {}
-    };
-  }
+    script.onload = () => {
+        minimap.accessToken = ACCESS_TOKEN;
+        minimap.onSaveMarkerLocation = (coordinate) => { console.log(coordinate); }
+        minimap.feature = {
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: coordinates },
+            properties: {}
+        };
+    }
 </script>

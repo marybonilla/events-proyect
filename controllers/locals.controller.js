@@ -36,12 +36,14 @@ module.exports.list = (req, res, next) => {
   
         return Local.count(query)
           .then(count => {
+            const user = req.user
             const maxPages = count / LOCALS_PER_PAGE
             console.log(maxPages)
             res.render(
               'local/list',
               {
                 locals,
+                user,
                 query: viewQuery,
                 nextPage: currentPage >= maxPages ? null : currentPage + 1,
                 previousPage: currentPage > 1 ? currentPage - 1 : null
@@ -103,9 +105,11 @@ module.exports.detail = (req, res, next) => {
     Local.findById(id)
     .populate ('owner')
     .then(local => {
+      const user = req.user
         local.location = formatCoordinates(JSON.parse(local.location))
         res.render('local/detail', { 
             local,
+            user,
             isBar: local.type === "Bar",
             isRestaurant: local.type === "Restaurant",
             isCafeteria: local.type === "Cafeteria"
@@ -118,14 +122,19 @@ module.exports.detail = (req, res, next) => {
 
 
 module.exports.create = (req, res, next) => {
-    res.render('local/new', {});
+  const user = req.user
+    res.render('local/new', {
+      user
+    });
 };
 
 
 module.exports.doCreate = (req, res, next) => {
+    const user = req.user
     const renderWithErrors = (errors) => {
         res.render('local/new', {
           local: req.body,
+          user,
           errors
         })
     }
@@ -156,10 +165,12 @@ module.exports.doCreate = (req, res, next) => {
 
 module.exports.editFormGet = (req, res, next) => {
     const { id } = req.params;
+    const user = req.user
     Local.findById(id)
     .then(local => {
       res.render('local/edit', { 
         local,
+        user,
         isEdit: true });
     })
     .catch(err => next(err));
@@ -167,8 +178,9 @@ module.exports.editFormGet = (req, res, next) => {
 
 module.exports.formPost = (req, res, next) => {
     const { id } = req.params;
+    const user = req.user
     console.log(req.body);
-    Local.findByIdAndUpdate(id, req.body, { new: true })
+    Local.findByIdAndUpdate(id, user, req.body, { new: true })
     .then(local => {
       res.redirect(`/locals/${local._id}`);
     })

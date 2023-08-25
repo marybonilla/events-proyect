@@ -1,5 +1,10 @@
 {{> navbar}}
-<h1 class="mt-4">Locals</h1>
+
+<div class="bg-list-locals">
+
+<div class="container">
+
+<h1 class="mt-4 h1-list">Locals</h1>
 
 <div class="row">
   {{#each locals}}
@@ -7,10 +12,13 @@
     <div class="card">
       
       <div class="card-image">
-        <img src={{image}} class="card-img-top" alt={{name}}>
+        <img src={{image}} class="card-img-top fixed-size-image " alt={{name}}>
       </div>
+      <div class="title-list">
+      <p class="p-title"> <strong> {{type}} || </strong> </p>
       <p class="card-title">{{name}}</p>
-      <p class="card-title">{{type}}</p>
+      
+      </div>
       <h6 class="card-title"> Capacity: {{capacity}} persons </h6>
       <a href="/locals/{{this._id}}" class="btn btn-primary">Details</a>
       <p class="footer">Created by {{owner.username}} <span class="by-name"></span> </p>
@@ -18,4 +26,7 @@
     </div>
   </div>
   {{/each}}
+</div>
+</div>
+
 </div>

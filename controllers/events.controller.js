@@ -5,17 +5,19 @@ const Local = require('../models/local.model');
 
 
 module.exports.listEvent = (req, res, next) => {
+  const user = req.user
     Event.find()
     .sort({ createdAt: 'descending' })
     .populate('local')
     .then(events => {
-        res.render('event/list', { events });
+        res.render('event/list', { events, user });
     })
     .catch(err => next(err));
 };
 
 module.exports.createEvent = (req, res, next) => {
-    res.render('event/form-event', { });
+  const user = req.user
+    res.render('event/form-event', { user });
 
 }
 
@@ -54,6 +56,7 @@ module.exports.doCreateEvent = (req, res, next) => {
 
 module.exports.detailEvent = (req, res,  next) => {
     const { id } = req.params;
+    const user = req.user
     
     function formatCoordinates(coordinates) {
         console.log(coordinates)
@@ -71,7 +74,7 @@ module.exports.detailEvent = (req, res,  next) => {
     .populate ('local')
     .then(event => {
         event.location = formatCoordinates(JSON.parse(event.location))
-      res.render('event/event-detail', { event } )
+      res.render('event/event-detail', { event, user } )
     })
     .catch(err => next(err));
 }
@@ -79,10 +82,12 @@ module.exports.detailEvent = (req, res,  next) => {
 
 module.exports.editFormEvent = (req, res, next) => {
     const { id } = req.params;
+    const user = req.user
     Event.findById(id)
     .then(event => {
       res.render('event/event-edit', { 
         event,
+        user,
         isEdit: true });
     })
     .catch(err => next(err));

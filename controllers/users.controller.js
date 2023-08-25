@@ -10,7 +10,14 @@ module.exports.getUserProfile = async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
     if (user) {
-      const formattedCreatedAt = user.createdAt.toLocaleDateString();
+      const formattedCreatedAt = user.createdAt.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+
+      console.log('formattedCreatedAt:', formattedCreatedAt);
+      
       res.render('user/profile', { user, formattedCreatedAt });
     } else {
       next(createError(404, 'User not found'))

@@ -9,10 +9,10 @@
             
                 <img width="280" height="280" class="border border-dark  border-2 rounded-circle p-1 rounded-circle  img-avatar" src="{{user.avatar}}" alt=""
                     referrerpolicy="no-referrer">
-            
+                <div class="data-profile">
                 <h3 class="h3-profile"> <strong> Hola </strong> {{user.username}} </h3>
-                <h3 class="h3-profile">Usuario creado el: {{formattedCreatedAt}}</h3>
-                   
+                <h6 class="h3-profile"> <strong> Member since: </strong> {{dateFormat formattedCreatedAt "dd/mm/yyyy"}}</h6>
+                   </div>
 
             </div>
 

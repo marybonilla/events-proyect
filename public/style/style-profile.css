@@ -1,0 +1,33 @@
+
+.profile{
+    display: flex;
+}
+.img-avatar{
+    border-color: black;
+}
+
+.avatar-profile{
+    margin-top: 55px;
+}
+
+.h3-profile{
+    font-family: Raleway;
+    margin-left: 70px;
+    margin-top: 20px;
+}
+
+
+.event-like{
+    margin-top: 66px;
+    border-radius: 35px;
+    background-color: aqua;
+    width: 930px;
+    height: 76vh;
+    margin-left: 44px;
+}
+
+.h2-profile{
+    font-family: Raleway; 
+    text-align: center;
+    margin-top: 10px;
+}

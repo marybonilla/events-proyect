@@ -61,7 +61,7 @@
         "image":"https://img.freepik.com/foto-gratis/cerveza-dorada-junto-deliciosas-hamburguesas-mesa-madera-papas-fritas-ensalada-verde-papas-fritas-salsa-ajo_482257-19717.jpg?w=1380&t=st=1691261126~exp=1691261726~hmac=aa2e68cdbae389b7d4970c0ffaa95f0dcfc5aad7a6a0f9a4431e6048da838b62",
         "description": "Bar H Emblemático es el último proyecto, en efecto, de los artífices del mítico comedor de Serrano. Podríamos decir que es una vuelta a sus orígenes, cuando en los años 60 el abuelo Pepe Hevia traía el mejor producto al bar que entonces regentaba.",
         "type":"Bar",
-         "barDetails": "Tapas bar",
+         "barDetails": "Tapas Bar",
         "capacity": "55"
     },
     {
@@ -70,7 +70,7 @@
         "image":"https://media.timeout.com/images/105827531/1920/1080/image.jpg",
         "description": "Ahora son tres socios. Se ha sumado Antonella que regenta este work in progress centrado en vinos naturales españoles y alguna sidra francesa.",
         "type":"Bar",
-         "barDetails": "Wine bar",
+         "barDetails": "Wine Bar",
         "capacity": "35"
     },
     {
@@ -79,7 +79,7 @@
         "image":"https://img.freepik.com/foto-gratis/restaurante-lujo-bar-interior-candelabros-muebles_114579-2341.jpg?w=2000&t=st=1691261610~exp=1691262210~hmac=af27af82348ef2242cbeba3950c345faa6c39562949c32e07c15d5ea45820e40",
         "description": "En el interior del fabuloso y emblemático hotel Rosewood Villa Magna hay incontables atractivos pero uno de los más accesibles es este espacio conocido como Tarde.O. Accesible económicamente porque puedes acercarte a su barra en deliciosa penumbra o entrar en su magnético y espectacular patio simplemente para tomarte un cóctel y picar algo.",
         "type":"Bar",
-         "barDetails": "Hotel bar",
+         "barDetails": "Hotel Bar",
         "capacity": "87"
     },
     {

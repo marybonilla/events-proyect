@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const mongoose = require('mongoose');
 const Local = require('../models/local.model')
 const createError = require('http-errors');
@@ -178,12 +180,13 @@ module.exports.editFormGet = (req, res, next) => {
 
 module.exports.formPost = (req, res, next) => {
     const { id } = req.params;
-    const user = req.user
     console.log(req.body);
-    Local.findByIdAndUpdate(id, user, req.body, { new: true })
+    Local.findByIdAndUpdate(id, req.body, { new: true })
     .then(local => {
       res.redirect(`/locals/${local._id}`);
     })
     .catch(err => next(err))
 };
+
+
 

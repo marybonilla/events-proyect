@@ -2,31 +2,70 @@
 
 <div class="bg-list-locals">
 
-<div class="container">
+  <div class="container">
 
-<h1 class="mt-4 h1-list">Locals</h1>
-
-<div class="row">
-  {{#each locals}}
-  <div class="col-md-4 mb-4">
-    <div class="card">
-      
-      <div class="card-image">
-        <img src={{image}} class="card-img-top fixed-size-image " alt={{name}}>
+    <h1 class="mt-4 h1-list">Locals</h1>
+    <div class="d-flex mb-3 gap-10 align-items-center">
+      <div class="btn-group me-3">
+        <button type="button"
+          class="btn {{#activeFilter query=query param='type'}}btn-success{{else}}btn-primary{{/activeFilter}}">Type</button>
+        <button type="button"
+          class="btn {{#activeFilter query=query param='type'}}btn-success{{else}}btn-primary{{/activeFilter}} dropdown-toggle dropdown-toggle-split"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <form action="/locals" method="get">
+            {{#each type }}
+            <li>
+              <button
+                class="dropdown-item {{#activeItemFilter query=../query param='type' value=this}}active{{/activeItemFilter}}"
+                name="type" value="{{this}}">{{this}}</button>
+            </li>
+            {{/each}}
+          </form>
+        </ul>
       </div>
-      <div class="title-list">
-      <p class="p-title"> <strong> {{type}} || </strong> </p>
-      <p class="card-title">{{name}}</p>
-      
-      </div>
-      <h6 class="card-title"> Capacity: {{capacity}} persons </h6>
-      <a href="/locals/{{this._id}}" class="btn btn-primary">Details</a>
-      <p class="footer">Created by {{owner.username}} <span class="by-name"></span> </p>
-      
+      {{#if query.hasFilter}}
+      <a href="/locals" class="btn a-details btn-primary-2">Clear filters</a>
+      {{/if}}
     </div>
+
+    {{#if locals}}
+
+    <div class="row">
+      {{#each locals}}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+
+          <div class="card-image">
+            <img src={{image}} class="card-img-top fixed-size-image " alt={{name}}>
+          </div>
+          <div class="title-list">
+            <p class="p-title"> <strong> {{type}} || </strong> </p>
+            <p class="card-title">{{name}}</p>
+
+          </div>
+          <h6 class="card-title"> Capacity: {{capacity}} persons </h6>
+          <a href="/locals/{{this._id}}" class="btn btn-primary">Details</a>
+          <p class="footer">Created by {{owner.username}} <span class="by-name"></span> </p>
+
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <nav class="mt-4 d-flex justify-content-center">
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link {{#unless previousPage}}disabled{{/unless}}"
+            href="?page={{previousPage}}">Previous</a></li>
+        <li class="page-item"><a class="page-link {{#unless nextPage}}disabled{{/unless}}"
+            href="?page={{nextPage}}">Next</a></li>
+      </ul>
+    </nav>
+    {{else}}
+    <p>There are not results for your filter</p>
+
+    {{/if}}
   </div>
-  {{/each}}
-</div>
-</div>
 
 </div>

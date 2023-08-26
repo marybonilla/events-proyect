@@ -92,3 +92,15 @@
     font-weight: bold;
     margin-top: 15px;
   }
+
+
+  .btn-primary-2 {
+    background-color: #31c7a7 !important;
+    width: 15% !important;
+    
+  }
+  .btn-primary-2:hover{
+    background-color: #6f00ff !important;
+  }
+
+  

@@ -7,25 +7,19 @@ const createError = require('http-errors');
 
 const cloudinary = require('cloudinary').v2;
 
-const LOCALS_PER_PAGE = 16;
+const LOCALS_PER_PAGE = 6;
 
 module.exports.list = (req, res, next) => {
-    const { Restaurant, Bar, Cafeteria, page = 1 } = req.query;
+  const { type, page = 1 } = req.query;
+  const currentPage = Number(page);
+
+  const query = {};
+
+  if (type) {
+    query.type = type;
+  }
   
-    const currentPage = Number(page);
-  
-    const query = {};
-  
-    if (Restaurant) {
-      query.Restaurant = Restaurant;
-    }
-    if (Bar) {
-      query.Bar = Bar;
-    }
-    if (Cafeteria) {
-        query.Cafeteria = Cafeteria;
-      }
-  
+    console.log(query);
     Local.find(query)
       .sort({ createdAt: 'descending' })
       .limit(LOCALS_PER_PAGE)
@@ -33,10 +27,8 @@ module.exports.list = (req, res, next) => {
       .populate('owner')
       .then(locals => {
         const viewQuery = {
-            Restaurant,
-            Bar,
-            Cafeteria,
-            hasFilter: Restaurant || Bar || Cafeteria
+            type,
+            hasFilter: [type].some(param => param)
         };
   
         return Local.count(query)
@@ -59,39 +51,6 @@ module.exports.list = (req, res, next) => {
       })
       .catch(next)
 }
-
-/*
-module.exports.detail = (req, res, next) => {
-    Local.findById(req.params.id)
-      .populate('verifications')
-      .then(local => {
-        const positiveVerifications = local.verifications.filter(verification => verification.validation).length;
-        const negativeVerifications = local.verifications.filter(verification => !verification.validation).length;
-  
-        const userVerification = local.verifications.find(verification => verification.user.toString() === req.user._id.toString());
-        const userPositive = userVerification && userVerification.validation === true;
-        const userNegative = userVerification && userVerification.validation === false;
-  
-        if (local) {
-          return Local.find({ type: local.type, _id: { $not: { $eq: local._id } } })
-            .limit(3)
-            .sort({ createdAt: 'desc' })
-            .then((relatedLocals) => {
-              res.render(
-                'local/detail',
-                { 
-                  local, positiveVerifications,
-                  negativeVerifications, userPositive,
-                  userNegative, relatedLocals
-                }
-              );
-            })
-        } else {
-          next(createError(404, 'Local not found'));
-        }
-      })
-      .catch(next)
-  }*/
 
 
   module.exports.detail = (req, res, next) => {
@@ -194,16 +153,19 @@ module.exports.editFormGet = (req, res, next) => {
 module.exports.formPost = (req, res, next) => {
   const { id } = req.params;
   const { image } = req.file; // Nueva imagen, si se proporcionó
-  const updateData = {
-      ...req.body,
-  };
+  const data = {
+    ...req.body,
+    owner: req.user._id,
+    image: req.file ? req.file.path : undefined,
+    //location: JSON.parse(req.body.location),
+}
 
   // Si se proporcionó una nueva imagen, actualiza la propiedad 'image' en 'updateData'
   if (image) {
       updateData.image = image.url; // Usa la URL de la imagen proporcionada por Cloudinary
   }
 
-  Local.findByIdAndUpdate(id, updateData, { new: true })
+  Local.findByIdAndUpdate(id, data, { new: true })
       .then(local => {
           res.redirect(`/locals/${local._id}`);
       })

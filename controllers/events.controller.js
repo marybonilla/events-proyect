@@ -95,9 +95,20 @@ module.exports.editFormEvent = (req, res, next) => {
 
 
 module.exports.postFormEvent = (req, res, next) => {
-    const { id } = req.params;
-    console.log(req.body);
-    Event.findByIdAndUpdate(id, req.body, { new: true })
+  const { id } = req.params;
+  const { image } = req.file; // Nueva imagen, si se proporcionó
+  const data = {
+    ...req.body,
+    owner: req.user._id,
+    image: req.file ? req.file.path : undefined,
+    //location: JSON.parse(req.body.location),
+}
+
+  // Si se proporcionó una nueva imagen, actualiza la propiedad 'image' en 'updateData'
+  if (image) {
+      updateData.image = image.url; // Usa la URL de la imagen proporcionada por Cloudinary
+  }
+    Event.findByIdAndUpdate(id, data, { new: true })
     .then(event => {
       res.redirect(`/events/${event._id}`);
     })

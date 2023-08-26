@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const Local = require('../models/local.model')
 const createError = require('http-errors');
 
+
+const cloudinary = require('cloudinary').v2;
+
 const LOCALS_PER_PAGE = 16;
 
 module.exports.list = (req, res, next) => {
@@ -178,7 +181,7 @@ module.exports.editFormGet = (req, res, next) => {
     .catch(err => next(err));
 };
 
-module.exports.formPost = (req, res, next) => {
+/*module.exports.formPost = (req, res, next) => {
     const { id } = req.params;
     console.log(req.body);
     Local.findByIdAndUpdate(id, req.body, { new: true })
@@ -186,7 +189,23 @@ module.exports.formPost = (req, res, next) => {
       res.redirect(`/locals/${local._id}`);
     })
     .catch(err => next(err))
+};*/
+
+module.exports.formPost = (req, res, next) => {
+  const { id } = req.params;
+  const { image } = req.file; // Nueva imagen, si se proporcionó
+  const updateData = {
+      ...req.body,
+  };
+
+  // Si se proporcionó una nueva imagen, actualiza la propiedad 'image' en 'updateData'
+  if (image) {
+      updateData.image = image.url; // Usa la URL de la imagen proporcionada por Cloudinary
+  }
+
+  Local.findByIdAndUpdate(id, updateData, { new: true })
+      .then(local => {
+          res.redirect(`/locals/${local._id}`);
+      })
+      .catch(err => next(err));
 };
-
-
-

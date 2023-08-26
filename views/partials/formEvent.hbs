@@ -1,11 +1,12 @@
 <script id="search-js" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+<div class="container">
 {{#if isEdit }}
- <h1>Edit Event</h1>
+ <h1 class="form-event">Edit Event</h1>
   <form action="/events/{{event.id}}/edit" method="POST" enctype="multipart/form-data">
 {{else}}
- <h1>Create New Event</h1>
+ <h1 class="form-event">Create New Event</h1>
   <form action="/events" method="POST" enctype="multipart/form-data">
 {{/if}}
   <div class="form-group mb-1">
@@ -90,6 +91,8 @@
 
   <button type="submit" class="btn btn-primary mb-5">Send</button>
 </form>
+
+</div>
 
 
 <script>

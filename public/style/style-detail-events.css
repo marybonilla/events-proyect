@@ -1,0 +1,59 @@
+
+.h1-event-detail {
+    
+    font-size: 43px;
+    font-family: Raleway;
+    font-weight: bold;
+
+}
+
+.h3-detail {
+    font-size: 25px;
+    font-family: Raleway;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.box-event{
+    display: flex;
+}
+
+.date-detail {
+    border-radius: 35px;
+    background-color: #F5F5F5;
+    width: 930px;
+    height: 83vh;
+}
+
+.date-detail P{
+    font-family: Raleway;
+    font-weight: bold;
+    margin-left: 15px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 25px;
+    font-family: Raleway;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 15px; 
+}
+
+.p-detail-2 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.a-details-2 {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.btn-details-2 {
+    background-color: #31c7a7 !important;
+    width: 15% !important;
+    margin-left: 300px;
+}
+

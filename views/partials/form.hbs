@@ -1,10 +1,12 @@
 <script id="search-js" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js" defer></script>
 
+<div class="container">
+
 {{#if isEdit }}
- <h1>Edit</h1>
+ <h1 class="form-event">Edit</h1>
   <form action="/locals/{{local.id}}/edit" method="POST" enctype="multipart/form-data">
 {{else}}
- <h1>Create New Local</h1>
+ <h1 class="form-event">Create New Local</h1>
   <form action="/locals/create" method="POST" enctype="multipart/form-data">
 {{/if}}
   <div class="form-group mb-1">
@@ -138,6 +140,7 @@
 
   <button type="submit" class="btn btn-primary mb-5">Send</button>
 </form>
+</div>
 
 <script>
   const ACCESS_TOKEN = 'pk.eyJ1IjoiY2RlbGF0b3JyZSIsImEiOiJja3Y5bHJ6ZzcweG0yMnZtZzI4eXJna2UxIn0.m-OWQWPhRrb5ZNRz0M9AqQ';

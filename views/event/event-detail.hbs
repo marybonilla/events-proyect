@@ -1,25 +1,32 @@
 <script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.17/web.js"></script>
 {{> navbar}}
-<h1>Detalles</h1>
+
 
 
 <div class="container">
-    <div class="box">
-        <h3> {{event.name}} </h3>
+    <h1 class="h1-event-detail">Detalles</h1>
+    <div class="box-event">
+        <div class="img-detail-event">
+        
         <div class="local-i">
             <img src="{{event.image}}" alt="{{event.name}}">
         </div>
-        <div>
-        
-            <p> Address: <strong> {{event.address}} </strong></p>
-            <p> Date: <strong> {{event.eventDate}} </strong></p>
+        </div>
+        <div class="date-detail">
+            <h3 class="h3-detail"> {{event.name}} </h3>
+            
+            <div class="p-detail-2">
+            <p> Date: <strong> {{dateFormat eventDate "dd/mm/yyyy"}} </strong></p>
             <p> Hour: <strong> {{event.eventTime}} hours </strong></p>
-            <p> Price: <strong> {{event.cost}} </strong></p>
+            <p> Price: <strong> {{event.cost}} € </strong></p>
+            </div>
+            <h2 class="c-dark-gray font-weight-semi mb-4 mt-4">Location </h2>
+            <p> Address: <strong> {{event.address}} </strong></p>
 
         
             
-            <h2 class="c-dark-gray font-weight-semi mb-4 mt-4">Location </h2>
-            <div class="row">
+            
+            <div class="row" style="position: relative;width: 95%;margin-left: 20px;">
                 <mapbox-address-minimap
                     satellite-toggle="true"
                     can-adjust-marker="true"
@@ -28,12 +35,14 @@
                 >
                 </mapbox-address-minimap>
             </div>
-            <button type="button" class="btn mt-5 btn-warning"> <a href="/events/{{event.id}}/edit">  Edit </a></button>
+            <button type="button" class="btn mt-5 btn-details-2"> <a class="a-details-2" href="/events/{{event.id}}/edit">  Edit </a></button>
         </div>
-        <section class="description"> 
+    </div>
+
+        <section class="description" style="margin-top: 35px;"> 
             <p> {{event.description}} </p>
         </section>
-    </div>
+    
     
 </div>
 

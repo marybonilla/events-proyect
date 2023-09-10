@@ -23,6 +23,16 @@
             <h2 class="h2-profile">Populars events</h2>
             {{/if}}
             
+            {{#if user.locals.length}}
+                <ul>
+                {{#each user.locals}}
+                <li>{{this.name}}</li> <!-- Muestra el nombre del local -->
+                {{/each}}
+                </ul>
+                {{else}}
+                <p>you don't have locals created.</p>
+            {{/if}}
+            
         </div>
     </div>
 </div>

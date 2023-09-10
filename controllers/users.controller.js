@@ -2,9 +2,21 @@ const User = require("../models/User.model");
 const createError = require('http-errors');
 
 module.exports.profile = (req, res, next) => {
-  const creatorRole = req.user.role === 'Creator';
-  res.render('user/profile', { user: req.user, creatorRole });
-}
+  User.findById(req.user._id)
+    .populate('locals') // Popula los locales asociados al usuario
+    .then((user) => {
+      const creatorRole = req.user.role === 'Creator';
+
+      if (user) {
+        res.render('user/profile', { user, creatorRole });
+      } else {
+        next(createError(404, 'User not found'));
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
 
 module.exports.getUserProfile = async (req, res, next) => {
   try {

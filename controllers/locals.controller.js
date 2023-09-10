@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Local = require('../models/local.model')
 const createError = require('http-errors');
+const User = require("../models/User.model");
 
 
 const cloudinary = require('cloudinary').v2;
@@ -94,37 +95,41 @@ module.exports.create = (req, res, next) => {
 
 
 module.exports.doCreate = (req, res, next) => {
-    const user = req.user
-    const renderWithErrors = (errors) => {
-        res.render('local/new', {
+  const user = req.user;
+  const renderWithErrors = (errors) => {
+      res.render('local/new', {
           local: req.body,
           user,
           errors
-        })
-    }
-   
+      });
+  };
 
-    const data = {
-        ...req.body,
-        owner: req.user._id,
-        image: req.file ? req.file.path : undefined,
-        //location: JSON.parse(req.body.location),
-    }
-    console.log(req.body)
-    //console.log("Controlador doCreate llamado");
-    Local.create(data)
-    .then(local => {
-        //console.log("Local creado exitosamente:", local);
-        res.redirect('/locals');
+  const data = {
+      ...req.body,
+      owner: req.user._id,
+      image: req.file ? req.file.path : undefined,
+  };
+
+  // Crear el local y obtener su ID
+  Local.create(data)
+      .then(local => {
+          // Asociar el local al propietario
+          User.findByIdAndUpdate(req.user._id, { $push: { locals: local._id } })
+              .then(() => {
+                  res.redirect('/locals');
+              })
+              .catch(err => {
+                  next(err);
+              });
       })
-    .catch(err => {
-      if (err instanceof mongoose.Error.ValidationError) {
-        console.log(err)
-        renderWithErrors(err.errors);
-      } else {
-        next(err);
-      }
-    })
+      .catch(err => {
+          if (err instanceof mongoose.Error.ValidationError) {
+              console.log(err);
+              renderWithErrors(err.errors);
+          } else {
+              next(err);
+          }
+      });
 };
 
 module.exports.editFormGet = (req, res, next) => {
@@ -140,15 +145,7 @@ module.exports.editFormGet = (req, res, next) => {
     .catch(err => next(err));
 };
 
-/*module.exports.formPost = (req, res, next) => {
-    const { id } = req.params;
-    console.log(req.body);
-    Local.findByIdAndUpdate(id, req.body, { new: true })
-    .then(local => {
-      res.redirect(`/locals/${local._id}`);
-    })
-    .catch(err => next(err))
-};*/
+
 
 module.exports.formPost = (req, res, next) => {
   const { id } = req.params;

@@ -57,7 +57,7 @@ const localSchema = new Schema(
     owner: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
-      required: false,
+      //required: false,
     },
   },
   { timestamps: true },

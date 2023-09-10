@@ -5,8 +5,8 @@ const usersController = require('../controllers/users.controller');
 const localsController = require('../controllers/locals.controller');
 const eventsController = require('../controllers/events.controller');
 const likesController = require ('../controllers/likes.controller');
-//const verificationsController = require('../controllers/verifications.controller');
 
+const creatorMiddleware = require('../middlewares/creator.middleware')
 
 const authMiddleware = require('../middlewares/auth.middleware');
 
@@ -36,17 +36,17 @@ router.get('/profile/:id', authMiddleware.isAuthenticated, usersController.getUs
 
 router.get('/locals',authMiddleware.isAuthenticated, localsController.list);
 router.post('/locals/create',authMiddleware.isAuthenticated, upload.single('image'), localsController.doCreate);
-router.get('/locals/create',authMiddleware.isAuthenticated, localsController.create);
+router.get('/locals/create',authMiddleware.isAuthenticated, creatorMiddleware.isCreator, localsController.create);
 
-router.get('/locals/:id/edit', authMiddleware.isAuthenticated, upload.single('image'), localsController.editFormGet);
-router.post('/locals/:id/edit', authMiddleware.isAuthenticated, upload.single('image'),localsController.formPost);
+router.get('/locals/:id/edit', authMiddleware.isAuthenticated,creatorMiddleware.isCreator, upload.single('image'), localsController.editFormGet);
+router.post('/locals/:id/edit', authMiddleware.isAuthenticated,creatorMiddleware.isCreator, upload.single('image'),localsController.formPost);
 
 router.get('/locals/:id', authMiddleware.isAuthenticated, localsController.detail);
 
 /* Event */
 
 router.get('/events', authMiddleware.isAuthenticated, eventsController.listEvent);
-router.get ('/events/create', authMiddleware.isAuthenticated, upload.single('image'), eventsController.createEvent);
+router.get ('/events/create', authMiddleware.isAuthenticated,creatorMiddleware.isCreator, upload.single('image'), eventsController.createEvent);
 router.post('/events', authMiddleware.isAuthenticated, upload.single('image'), eventsController.doCreateEvent);
 
 router.get('/events/:id/edit', authMiddleware.isAuthenticated,eventsController.editFormEvent);

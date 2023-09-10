@@ -34,3 +34,24 @@
     text-align: center;
     margin-top: 10px;
 }
+
+
+.card-profile-user {
+    display: flex;
+    
+}
+
+.card-img-profile{
+    min-height: 120px;
+}
+
+.card-profile{
+    padding: 20px;
+    width: 330px;
+}
+
+.card-profile .card-img-top {
+    height: 55%; /* Establece una altura fija para las imágenes */
+    width: 100%; /* Asegura que la imagen llene todo el espacio disponible */
+    object-fit: cover; /* Escala y recorta la imagen para ajustarla a la altura fija */
+  }

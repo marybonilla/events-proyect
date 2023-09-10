@@ -18,17 +18,24 @@
 
         <div class="event-like">
             {{#if creatorRole}}
-            <h2 class="h2-profile">My Creations</h2>
+            <h2 class="h2-profile">My Creations <hr> </h2>
             {{else}}
             <h2 class="h2-profile">Populars events</h2>
             {{/if}}
             
             {{#if user.locals.length}}
-                <ul>
+                <div class="row card-profile-user" style="justify-content: center;">
                 {{#each user.locals}}
-                <li>{{this.name}}</li> <!-- Muestra el nombre del local -->
+                 <!-- Muestra el nombre del local -->
+                 <div class="card-profile" style="width: 12rem;">
+                    <img src={{this.image}} class="card-img-top card-img-profile" alt={{this.name}}>
+                    <div class="card-body">
+                        <h5 class="card-title"> <strong>{{this.name}} </strong> </h5>
+                        <a href="/locals/{{this._id}}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
                 {{/each}}
-                </ul>
+                </div>
                 {{else}}
                 <p>you don't have locals created.</p>
             {{/if}}
@@ -36,3 +43,5 @@
         </div>
     </div>
 </div>
+
+<li>{{this.name}}</li>

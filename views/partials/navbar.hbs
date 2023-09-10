@@ -27,7 +27,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item a-color" href="/locals">All Locals</a></li>
+            {{#ifCreator currentUser.role}}
             <li><a class="dropdown-item a-color" href="/locals/create">Create new local</a></li>
+            {{/ifCreator}}
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -36,7 +38,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item a-color" href="/events">All Events</a></li>
+            {{#ifCreator currentUser.role}}
             <li><a class="dropdown-item a-color" href="/events/create">Create new event</a></li>
+          {{/ifCreator}}
           </ul>
         </li>
         <li class="nav-item">

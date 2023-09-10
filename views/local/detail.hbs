@@ -58,7 +58,9 @@
                 </div>
             </div>
         </section>
+        {{#ifCreator currentUser.role}}
         <button type="button" class="btn mt-5 btn-details"> <a class="a-details" href="/locals/{{local.id}}/edit"> Edit </a></button>
+        {{/ifCreator}}
     </div>
 
         <section class="description" style="margin-top: 35px;">

@@ -35,7 +35,9 @@
                 >
                 </mapbox-address-minimap>
             </div>
+            {{#ifCreator currentUser.role}}
             <button type="button" class="btn mt-5 btn-details-2"> <a class="a-details-2" href="/events/{{event.id}}/edit">  Edit </a></button>
+            {{/ifCreator}}
         </div>
     </div>
 

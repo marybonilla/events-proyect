@@ -50,6 +50,13 @@ localField: '_id',
   justOne: false
 });
 
+userSchema.virtual('events', {
+  ref: 'Event',
+  foreignField: 'owner',
+  localField: '_id',
+  justOne: false
+});
+
 userSchema.pre('save', function(next) {
   if (this.isModified('password')) {
     bcrypt

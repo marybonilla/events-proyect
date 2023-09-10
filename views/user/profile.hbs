@@ -18,13 +18,13 @@
 
         <div class="event-like">
             {{#if creatorRole}}
-            <h2 class="h2-profile">My Creations <hr> </h2>
+            <h2 class="h2-profile">My Locals <hr> </h2>
             {{else}}
             <h2 class="h2-profile">Populars events</h2>
             {{/if}}
             
             {{#if user.locals.length}}
-                <div class="row card-profile-user" style="justify-content: center;">
+                <div class="row card-profile-user" style="justify-content: space-between;">
                 {{#each user.locals}}
                  <!-- Muestra el nombre del local -->
                  <div class="card-profile" style="width: 12rem;">
@@ -37,11 +37,32 @@
                 {{/each}}
                 </div>
                 {{else}}
-                <p>you don't have locals created.</p>
+                <h2>you don't have locals created.</h2>
+            {{/if}}
+
+            {{#if userEvents.length}}
+            <div class="user-events">
+            <h2>My Events <hr></h2>
+            <div class="row card-profile-user" style="justify-content: space-between;">
+                {{#each userEvents}}
+                <div class="card-profile" style="width: 12rem;">
+                    <img src="{{this.image}}" class="card-img-top card-img-profile" alt="{{this.name}}">
+                    
+                    <div class="card-body">
+                    <p class="p-title"><strong>{{this.name}}</strong></p>
+                    <h6 class="card-title">Cost: {{this.cost}} € </h6>
+                    <a href="/events/{{this._id}}" class="btn btn-primary">Details</a>
+                    </div>
+                    
+                </div>
+                </div>
+                {{/each}}
+            </div>
+            </div>
+            {{else}}
+            <h2>you don't have events created.</h2>
             {{/if}}
             
         </div>
     </div>
 </div>
-
-<li>{{this.name}}</li>

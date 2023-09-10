@@ -2,7 +2,8 @@ const User = require("../models/User.model");
 const createError = require('http-errors');
 
 module.exports.profile = (req, res, next) => {
-  res.render('user/profile', { user: req.user });
+  const creatorRole = req.user.role === 'Creator';
+  res.render('user/profile', { user: req.user, creatorRole });
 }
 
 module.exports.getUserProfile = async (req, res, next) => {
@@ -18,7 +19,7 @@ module.exports.getUserProfile = async (req, res, next) => {
 
       console.log('formattedCreatedAt:', formattedCreatedAt);
       
-      res.render('user/profile', { user, formattedCreatedAt });
+      res.render('user/profile', { user, formattedCreatedAt, });
     } else {
       next(createError(404, 'User not found'))
     }
